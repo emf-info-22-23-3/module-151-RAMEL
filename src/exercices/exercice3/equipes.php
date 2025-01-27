@@ -13,11 +13,14 @@
       </tr>
       <?php
         require('ctrl.php');
-        function ajouteCelluleHtml(String contenu, String id){
-          echo "<tr>"
+        $equipes = getEquipes();
+
+        for ($i=0; $i < count($equipes); $i++) { 
+          ajouteCelluleHtml( $equipes[$i],$i);
         }
-        foreach(String contenu, String id){
-          ajouteCelluleHtml(contenu, id);
+        
+        function ajouteCelluleHtml($contenu, $id){
+          echo "<tr><td>{$id}</td><td>{$contenu}</td></tr>";
         }
       ?>
       </table>
