@@ -13,7 +13,12 @@
       </tr>
       <?php
         require('ctrl.php');
-        // A compléter....
+        function ajouteCelluleHtml(String contenu, String id){
+          echo "<tr>"
+        }
+        foreach(String contenu, String id){
+          ajouteCelluleHtml(contenu, id);
+        }
       ?>
       </table>
     </div>
