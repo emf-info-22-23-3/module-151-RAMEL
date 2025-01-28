@@ -12,7 +12,7 @@ class DB {
         $reponse->execute();
         $joueurs = array();
         while ($joueur = $reponse->fetch()) {
-            array_push($joueurs, new Joueur($joueur['PK_joueur'], $joueur['Nom'], $joueur['FK_equipe']), $joueur['Points']);
+            array_push($joueurs, new Joueurs($joueur['PK_joueur'], $joueur['Nom'], $joueur['FK_equipe']), $joueur['Points']);
         }
         $reponse->closeCursor();
         return $joueurs;
@@ -23,7 +23,7 @@ class DB {
         $reponse->execute();
         $equipes = array();
         while ($equipe = $reponse->fetch()) {
-            array_push($equipes, new Equipe($equipe['PK_equipe'], $equipe['Nom']));
+            array_push($equipes, new Equipes($equipe['PK_equipe'], $equipe['Nom']));
         }
         $reponse->closeCursor();
         return $equipes;

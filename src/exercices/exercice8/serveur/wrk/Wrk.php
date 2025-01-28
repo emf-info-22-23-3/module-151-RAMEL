@@ -19,8 +19,8 @@ class Wrk {
         foreach ($joueurs as $joueur) {
             $joueurElement = $xml->addChild('joueur');
             $joueurElement->addChild('id', $joueur->getId());
-            $joueurElement->addChild('nom', $joueur->getNom());
-            $joueurElement->addChild('equipe', $joueur->getEquipe());
+            $joueurElement->addChild('nom', $joueur->getName());
+            $joueurElement->addChild('equipe', $joueur->getFKEquipe());
             $joueurElement->addChild('points', $joueur->getPoints());
         }
 
