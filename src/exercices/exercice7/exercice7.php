@@ -1,14 +1,14 @@
 <?php
 	$bdd = new PDO('mysql:host=localhost;dbname=nomDB', 'root', 'pwd');
-	$reponse = …;
+	$reponse = $bdd->prepare('SELECT * FROM jeux');
+	$reponse->execute();
+	$jeux = $reponse->fetchALL();
 	
-	
-	while (…)
-	{
-	
-	        …
+	$compteur = 0;
 
-	
+	while (compteur < count($reponse)) {
+		echo $reponse[compteur];
+		$compteur++;
 	}
 	$reponse->closeCursor();
 ?>
