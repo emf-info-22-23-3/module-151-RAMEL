@@ -1,5 +1,5 @@
 <?php
-	$bdd = new PDO('mysql:host=localhost;dbname=nomDB', 'root', 'pwd');
+	$bdd = new PDO('mysql:host=localhost;dbname=nomDB', 'root', 'emf123');
 	$reponse = $bdd->prepare('SELECT * FROM jeux');
 	$reponse->execute();
 	$jeux = $reponse->fetchALL();
