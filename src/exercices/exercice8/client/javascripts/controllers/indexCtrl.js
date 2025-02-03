@@ -21,6 +21,9 @@ function chargerTeamSuccess(data, text, jqXHR) {
         equipe.setNom($(this).find("nom").text());
         cmbEquipes.options[cmbEquipes.options.length] = new Option(equipe, JSON.stringify(equipe));
     });
+
+    //equipe = cmbEquipes.options[cmbEquipes.selectedIndex].value;
+    //chargerPlayers(JSON.parse(equipe).pk, chargerPlayerSuccess, chargerPlayerError);
 }
 
 /**
@@ -35,9 +38,9 @@ function chargerPlayerSuccess(data, text, jqXHR) {
     cmbJoueurs.options.length = 0;
     $(data).find("joueur").each(function() {
         var joueur = new Joueur();
-        joueur.setNom($(this).find("nom").text())
-        joueur.setPoints($(this).find("points").text())
-	    cmbJoueurs.options[cmbJoueurs.options.length] = new Option(joueur, JSON.stringify(joueur));
+        joueur.setNom($(this).find("nom").text());
+        joueur.setPoints($(this).find("points").text());
+        cmbJoueurs.options[cmbJoueurs.options.length] = new Option(joueur, JSON.stringify(joueur));
     });
 }
 
@@ -93,4 +96,3 @@ $(document).ready(function() {
         alert(JSON.parse(joueur).nom + ": " + JSON.parse(joueur).points + " points");
     });
 });
-

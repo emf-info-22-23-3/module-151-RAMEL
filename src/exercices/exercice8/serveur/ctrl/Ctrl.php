@@ -1,19 +1,17 @@
 <?php
-require_once("./wrk/DB.php");
 
-class Wrk {
+class Ctrl {
     
-    private $db;
+    private $wrk;
 
     public function __construct() {
-        $this->db = new DB();
+        $this->wrk = new DB();
     }
 
     public function getJoueursXML($idEquipe)
     {
-        $joueurs = $this->db->getJoueurs($idEquipe);
+        $joueurs = $this->wrk->getJoueurs($idEquipe);
         
-        // Création de l'objet XML
         $xml = new SimpleXMLElement('<joueurs></joueurs>');
         
         foreach ($joueurs as $joueur) {
@@ -24,13 +22,12 @@ class Wrk {
             $joueurElement->addChild('points', $joueur->getPoints());
         }
 
-        // Retourne le XML sous forme de chaîne
         return $xml->asXML();
     }
 
     public function getEquipesXML()
     {
-        $equipes = $this->db->getEquipes();
+        $equipes = $this->wrk->getEquipes();
         
         $xml = new SimpleXMLElement('<equipes></equipes>');
         
@@ -40,7 +37,6 @@ class Wrk {
             $equipeElement->addChild('nom', $equipe->getNom());
         }
 
-        // Retourne le XML sous forme de chaîne
         return $xml->asXML();
     }
 

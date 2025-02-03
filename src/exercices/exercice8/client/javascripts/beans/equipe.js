@@ -45,4 +45,3 @@ Equipe.prototype.getPk = function () {
   return this.pk;
 };
 
-
