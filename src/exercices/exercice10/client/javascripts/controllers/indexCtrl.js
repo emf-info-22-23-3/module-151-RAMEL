@@ -1,8 +1,6 @@
 /*
  * Contrôleur de la vue "index.html"
  *
- * @author Olivier Neuhaus
- * @version 1.0 / 13-SEP-2013
  */
 
 /**
@@ -32,15 +30,16 @@ function chargerPaysSuccess(data, text, jqXHR)
  */
 function chargerSkieursSuccess(data, text, jqXHR)
 {   
-    var txt = '';
-    $(data).find("skieur").each(function() {
-        var skieur = new Skieur();
-        skieur.setNom($(this).find("nom").text());
-        skieur.setPosition($(this).find("position").text());
-        txt = txt + "<tr><td>" + skieur.getPosition() + "</td><td>" + skieur.toString() + "</td></tr>";
+  var txt = '';
+  $(data).find("skieur").each(function() {
+      var skieur = new Skieur();
+      skieur.setNom($(this).find("nom").text());
+      skieur.setPosition($(this).find("position").text());
+      console.log(skieur);
+      txt = txt + "<tr><td>" + skieur.getPosition() + "</td><td>" + skieur.toString() + "</td></tr>";
 
-    });  
-    document.getElementById("tableContent").innerHTML = txt;
+  });  
+  document.getElementById("tableContent").innerHTML = txt;
 }
 
 /**
