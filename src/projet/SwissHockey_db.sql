@@ -5,10 +5,11 @@ CREATE DATABASE IF NOT EXISTS `bd_SwissHockey` DEFAULT CHARACTER SET utf8 COLLAT
 USE `bd_SwissHockey`;
 
 -- Table T_Canton
-CREATE TABLE T_Canton (
-    PK_Canton INT PRIMARY KEY AUTO_INCREMENT,
-    nom VARCHAR(45) NOT NULL,
-    abreviation VARCHAR(2) NOT NULL
+CREATE TABLE IF NOT EXISTS `T_Canton` (
+    `PK_Canton` INT PRIMARY KEY AUTO_INCREMENT,
+    `nom` VARCHAR(45) NOT NULL,
+    `abreviation` VARCHAR(2) NOT NULL,
+    PRIMARY KEY (`PK_Canton`)
 );
 
 --
@@ -16,50 +17,51 @@ CREATE TABLE T_Canton (
 --
 
 INSERT INTO `T_Canton` (`nom`, `abreviation`) VALUES
-1('Argovie', 'AG'),
-2('Appenzell Rhodes-Extérieures', 'AR'),
-3('Appenzell Rhodes-Intérieures', 'AI'),
-4('Bâle-Campagne', 'BL'),
-5('Bâle-Ville', 'BS'),
-6('Berne', 'BE'),
-7('Fribourg', 'FR'),
-8('Genève', 'GE'),
-9('Glaris', 'GL'),
-10('Grisons', 'GR'),
-11('Jura', 'JU'),
-12('Lucerne', 'LU'),
-13('Neuchâtel', 'NE'),
-14('Nidwald', 'NW'),
-15('Obwald', 'OW'),
-16('Schaffhouse', 'SH'),
-17('Schwytz', 'SZ'),
-18('Soleure', 'SO'),
-19('Saint-Gall', 'SG'),
-20('Tessin', 'TI'),
-21('Thurgovie', 'TG'),
-22('Uri', 'UR'),
-23('Valais', 'VS'),
-24('Vaud', 'VD'),
-25('Zoug', 'ZG'),
-26('Zurich', 'ZH');
+('Argovie', 'AG'),
+('Appenzell Rhodes-Extérieures', 'AR'),
+('Appenzell Rhodes-Intérieures', 'AI'),
+('Bâle-Campagne', 'BL'),
+('Bâle-Ville', 'BS'),
+('Berne', 'BE'),
+('Fribourg', 'FR'),
+('Genève', 'GE'),
+('Glaris', 'GL'),
+('Grisons', 'GR'),
+('Jura', 'JU'),
+('Lucerne', 'LU'),
+('Neuchâtel', 'NE'),
+('Nidwald', 'NW'),
+('Obwald', 'OW'),
+('Schaffhouse', 'SH'),
+('Schwytz', 'SZ'),
+('Soleure', 'SO'),
+('Saint-Gall', 'SG'),
+('Tessin', 'TI'),
+('Thurgovie', 'TG'),
+('Uri', 'UR'),
+('Valais', 'VS'),
+('Vaud', 'VD'),
+('Zoug', 'ZG'),
+('Zurich', 'ZH');
 
 -- Table T_Equipe
-CREATE TABLE T_Equipe (
-    PK_Equipe INT PRIMARY KEY AUTO_INCREMENT,
-    nom VARCHAR(50) NOT NULL,
-    abreviation VARCHAR(5) NOT NULL,
-    dateCreation DATE NOT NULL,
-    photo VARCHAR(60) NOT NULL,
-    trophe VARCHAR(200),
-    fkCanton INT NOT NULL,
-    FOREIGN KEY (fkCanton) REFERENCES T_Canton(PK_Canton)
+CREATE TABLE IF NOT EXISTS `T_Equipe` (
+    `PK_Equipe` INT PRIMARY KEY AUTO_INCREMENT,
+    `nom` VARCHAR(50) NOT NULL,
+    `abreviation` VARCHAR(5) NOT NULL,
+    `dateCreation` DATE NOT NULL,
+    `photo` VARCHAR(60) NOT NULL,
+    `trophe` VARCHAR(200),
+    `fkCanton` INT NOT NULL,
+    PRIMARY KEY (`PK_Equipe`),
+    FOREIGN KEY (`fkCanton`) REFERENCES `T_Canton`(`PK_Canton`)
 );
 
 --
 -- Contenu de la table `T_Equipe`
 --
 
-INSERT INTO T_Equipe (`nom`, `abreviation`, `dateCreation`, `photo`, `trophe`, `fkCanton`) VALUES
+INSERT INTO `T_Equipe` (`nom`, `abreviation`, `dateCreation`, `photo`, `trophe`, `fkCanton`) VALUES
 ('HC Ajoie', 'HCA', '1973-01-01', 'https://ramela.emf-informatique.ch/151/img/HCA.png', '', 11),
 ('HC Ambrì-Piotta', 'HCAP', '1937-01-01', 'https://ramela.emf-informatique.ch/151/img/HCAP.png', '', 20),
 ('SC Bern', 'SCB', '1931-01-01', 'https://ramela.emf-informatique.ch/151/img/SCB.png', '', 6),
@@ -76,32 +78,34 @@ INSERT INTO T_Equipe (`nom`, `abreviation`, `dateCreation`, `photo`, `trophe`, `
 ('EV Zug', 'EVZ', '1967-01-01', 'https://ramela.emf-informatique.ch/151/img/EVZ.png', '', 25);
 
 -- Table T_Position
-CREATE TABLE T_Position (
-    PK_Position INT PRIMARY KEY AUTO_INCREMENT,
-    position VARCHAR(2) NOT NULL
+CREATE TABLE IF NOT EXISTS `T_Position` (
+    `PK_Position` INT PRIMARY KEY AUTO_INCREMENT,
+    `position` VARCHAR(2) NOT NULL,
+    PRIMARY KEY (`PK_Position`)
 );
 
 --
 -- Contenu de la table `T_Equipe`
 --
 
-INSERT INTO T_Equipe (`position`) VALUES
+INSERT INTO `T_Equipe` (`position`) VALUES
 ('F'),
 ('D'),
 ('G'),
 
 
 -- Table T_Nationalite
-CREATE TABLE T_Nationalite (
-    PK_Nationalite INT PRIMARY KEY AUTO_INCREMENT,
-    nationalite VARCHAR(45) NOT NULL
+CREATE TABLE IF NOT EXISTS `T_Nationalite` (
+    `PK_Nationalite` INT PRIMARY KEY AUTO_INCREMENT,
+    `nationalite` VARCHAR(45) NOT NULL,
+    PRIMARY KEY (`PK_Nationalite`)
 );
 
 --
 -- Contenu de la table `T_Nationalite`
 --
 
-INSERT INTO T_Nationalite (nationalite) VALUES
+INSERT INTO `T_Nationalite` (`nationalite`) VALUES
 ('Afghan'),
 ('Albanais'),
 ('Algérien'),
@@ -284,26 +288,27 @@ INSERT INTO T_Nationalite (nationalite) VALUES
 ('Zimbabwéen');
 
 -- Table T_Joueur
-CREATE TABLE T_Joueur (
-    PK_Joueur INT PRIMARY KEY AUTO_INCREMENT,
-    prenom VARCHAR(45) NOT NULL,
-    nom VARCHAR(45) NOT NULL,
-    dateNaissance DATE,
-    photo VARCHAR(60),
-    description VARCHAR(200),
-    fkPosition INT NOT NULL,
-    fkEquipe INT NOT NULL,
-    fkNationalite INT NOT NULL,
-    FOREIGN KEY (fkPosition) REFERENCES T_Position(PK_Position),
-    FOREIGN KEY (fkEquipe) REFERENCES T_Equipe(PK_Equipe),
-    FOREIGN KEY (fkNationalite) REFERENCES T_Nationalite(PK_Nationalite)
+CREATE TABLE IF NOT EXISTS `T_Joueur` (
+    `PK_Joueur` INT PRIMARY KEY AUTO_INCREMENT,
+    `prenom` VARCHAR(45) NOT NULL,
+    `nom` VARCHAR(45) NOT NULL,
+    `dateNaissance` DATE,
+    `photo` VARCHAR(60),
+    `description` VARCHAR(200),
+    `fkPosition` INT NOT NULL,
+    `fkEquipe` INT NOT NULL,
+    `fkNationalite` INT NOT NULL,
+    PRIMARY KEY (`PK_Joueur`),
+    FOREIGN KEY (`fkPosition`) REFERENCES `T_Position`(`PK_Position`),
+    FOREIGN KEY (`fkEquipe`) REFERENCES `T_Equipe`(`PK_Equipe`),
+    FOREIGN KEY (`fkNationalite`) REFERENCES `T_Nationalite`(`PK_Nationalite`)
 );
 
 --
 -- Contenu de la table `T_Joueur`
 --
 
-INSERT INTO T_Joueur (prenom, nom, dateNaissance, photo, description, fkPosition, fkEquipe, fkNationalite)
+INSERT INTO T_Joueur (`prenom`, `nom`, `dateNaissance`, `photo`, `description`, `fkPosition`, `fkEquipe`, `fkNationalite`)
 VALUES
 ('Julius', 'Nättinen', '1997-01-14', 'https://ramela.emf-informatique.ch/151/img/.png', '', 1, 1, 59),
 ('Anttoni', 'Honka', '2000-10-05', 'https://ramela.emf-informatique.ch/151/img/.png', '', 2, 1, 59),
@@ -349,27 +354,64 @@ VALUES
 ('Tim', 'Wolf', '1992-01-25', 'https://ramela.emf-informatique.ch/151/img/.png', '', 3, 14, 156);
 
 -- Table T_Utilisateur
-CREATE TABLE T_Utilisateur (
-    PK_Utilisateur INT PRIMARY KEY AUTO_INCREMENT,
-    login VARCHAR(20) NOT NULL,
-    password VARCHAR(64) NOT NULL
+CREATE TABLE IF NOT EXISTS `T_Utilisateur` (
+    `PK_Utilisateur` INT PRIMARY KEY AUTO_INCREMENT,
+    `login` VARCHAR(20) NOT NULL,
+    `password` VARCHAR(64) NOT NULL,
+    PRIMARY KEY (`PK_Utilisateur`)
 );
+
+--
+-- Contenu de la table `T_Utilisateur`
+--
+
+INSERT INTO `T_Utilisateur` (`login`, `password`) VALUES
+('Admin', 'Pa$$w0rd'),
+('adm-RAM', 'Pa$$w0rd'),
+('adm-local', 'emf123');
 
 -- Table T_Match
-CREATE TABLE T_Match (
-    PK_Match INT PRIMARY KEY AUTO_INCREMENT,
-    date DATE NOT NULL,
-    heure VARCHAR(5),
-    goalDom INT,
-    goalVisit INT
+CREATE TABLE IF NOT EXISTS `T_Match` (
+    `PK_Match` INT PRIMARY KEY AUTO_INCREMENT,
+    `date` DATE NOT NULL,
+    `heure` VARCHAR(5),
+    `goalDom` INT,
+    `goalVisit` INT,
+    PRIMARY KEY (`PK_Match`)
 );
 
+--
+-- Contenu de la table `T_Match`
+--
+
+INSERT INTO `T_Match` (`date`, `heure`, `goalDom`, `goalVisit`) VALUES
+('Admin', 'Pa$$w0rd'),
+('adm-RAM', 'Pa$$w0rd'),
+('adm-local', 'emf123');
+
 -- Table TR_Match_Equipe (Table de relation)
-CREATE TABLE TR_Match_Equipe (
-    RfMatch INT NOT NULL,
-    RfEquipeDOM INT NOT NULL,
-    RfEquipeVIS INT NOT NULL,
-    PRIMARY KEY (RfMatch, RfEquipe),
-    FOREIGN KEY (RfMatch) REFERENCES T_Match(PK_Match),
-    FOREIGN KEY (RfEquipe) REFERENCES T_Equipe(PK_Equipe)
+CREATE TABLE IF NOT EXISTS `TR_Match_Equipe` (
+    `RfMatch` int NOT NULL,
+    `RfEquipeDOM` int NOT NULL,
+    `RfEquipeVIS` int NOT NULL,
+    PRIMARY KEY (`RfMatch`, `RfEquipeDOM`, `RfEquipeVIS`),
+    FOREIGN KEY (`RfMatch`) REFERENCES `T_Match`(`PK_Match`),
+    FOREIGN KEY (`RfEquipeDOM`) REFERENCES `T_Equipe`(`PK_Equipe`)
+    FOREIGN KEY (`RfEquipeVIS`) REFERENCES `T_Equipe`(`PK_Equipe`)
 );
+
+--
+-- Contenu de la table `TR_Match_Equipe`
+--
+
+INSERT INTO `TR_Match_Equipe` (`RfMatch`, `RfEquipeDOM`, `RfEquipeVIS`) VALUES
+(1, , ),
+(2, , ),
+(3, , ),
+(4, , ),
+(5, , ),
+(6, , ),
+(7, , ),
+(8, , ),
+(9, , ),
+(10, , );
