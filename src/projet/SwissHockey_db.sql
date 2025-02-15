@@ -426,12 +426,6 @@ INSERT INTO `TR_Match_Equipe` (`RfMatch`, `RfEquipeDOM`, `RfEquipeVIS`, `goalDom
 (7, 12, 8, 5, 2),
 (8, 5, 7, 3, 2),
 (9, 14, 12, 6, 1),
-(10, 1, 3, , );
-(11, 5, 6, , );
-(12, 8, 14, , );
-(13, 7, 10, , );
-(14, 11, 1, , );
-(15, 14, 9, , );
 
 INSERT INTO `TR_Match_Equipe` (`RfMatch`, `RfEquipeDOM`, `RfEquipeVIS`) VALUES
 (10, 1, 3);
