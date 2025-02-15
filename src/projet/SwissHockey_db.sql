@@ -375,8 +375,6 @@ CREATE TABLE IF NOT EXISTS `T_Match` (
     `PK_Match` INT PRIMARY KEY AUTO_INCREMENT,
     `date` DATE NOT NULL,
     `heure` VARCHAR(5),
-    `goalDom` INT,
-    `goalVisit` INT,
     PRIMARY KEY (`PK_Match`)
 );
 
@@ -384,16 +382,30 @@ CREATE TABLE IF NOT EXISTS `T_Match` (
 -- Contenu de la table `T_Match`
 --
 
-INSERT INTO `T_Match` (`date`, `heure`, `goalDom`, `goalVisit`) VALUES
-('Admin', 'Pa$$w0rd'),
-('adm-RAM', 'Pa$$w0rd'),
-('adm-local', 'emf123');
+INSERT INTO `T_Match` (`date`, `heure`) VALUES
+('2024-09-20', '19:45'),
+('2024-09-21', '19:45'),
+('2024-10-11', '19:45'),
+('2024-10-19', '19:45'),
+('2024-11-14', '20:00'),
+('2024-12-23', '19:45'),
+('2025-01-10', '19:45'),
+('2025-01-30', '19:45'),
+('2025-02-14', '19:45'),
+('2025-02-21', '19:45'),
+('2025-02-21', '19:45'),
+('2025-02-27', '19:45'),
+('2025-02-27', '19:45'),
+('2025-03-01', '19:45'),
+('2025-03-01', '19:45');
 
 -- Table TR_Match_Equipe (Table de relation)
 CREATE TABLE IF NOT EXISTS `TR_Match_Equipe` (
     `RfMatch` int NOT NULL,
     `RfEquipeDOM` int NOT NULL,
     `RfEquipeVIS` int NOT NULL,
+    `goalDom` INT,
+    `goalVisit` INT,
     PRIMARY KEY (`RfMatch`, `RfEquipeDOM`, `RfEquipeVIS`),
     FOREIGN KEY (`RfMatch`) REFERENCES `T_Match`(`PK_Match`),
     FOREIGN KEY (`RfEquipeDOM`) REFERENCES `T_Equipe`(`PK_Equipe`)
@@ -404,14 +416,27 @@ CREATE TABLE IF NOT EXISTS `TR_Match_Equipe` (
 -- Contenu de la table `TR_Match_Equipe`
 --
 
+INSERT INTO `TR_Match_Equipe` (`RfMatch`, `RfEquipeDOM`, `RfEquipeVIS`, `goalDom`, `goalVisit`) VALUES
+(1, 13, 2, 5, 4),
+(2, 6, 10, 4, 0),
+(3, 9, 6, 6, 0),
+(4, 6, 10, 4, 0),
+(5, 9, 13, 2, 0),
+(6, 4, 3, 0, 3),
+(7, 12, 8, 5, 2),
+(8, 5, 7, 3, 2),
+(9, 14, 12, 6, 1),
+(10, 1, 3, , );
+(11, 5, 6, , );
+(12, 8, 14, , );
+(13, 7, 10, , );
+(14, 11, 1, , );
+(15, 14, 9, , );
+
 INSERT INTO `TR_Match_Equipe` (`RfMatch`, `RfEquipeDOM`, `RfEquipeVIS`) VALUES
-(1, , ),
-(2, , ),
-(3, , ),
-(4, , ),
-(5, , ),
-(6, , ),
-(7, , ),
-(8, , ),
-(9, , ),
-(10, , );
+(10, 1, 3);
+(11, 5, 6);
+(12, 8, 14);
+(13, 7, 10);
+(14, 11, 1);
+(15, 14, 9);
