@@ -1,34 +1,220 @@
-
 <!DOCTYPE html>
-<div class="login">
-    <label>Login</label>
-    <input type="text" placeholder="login" id="username">
-    <label>Mot de passe</label>
-    <input type="password" placeholder="mot de passe" id="mot de passe">
-    <button id="connecter">Connecter</button>
-</div>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>SwissHockey</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 20px;
+        }
+        
+        .title {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
 
-<div class="container">
-    <div class="sidebar">
-        <label for="equipes">Équipes</label>
-        <select id="equipes">
-            <option>Équipes</option>
-        </select>
-        <h3>Joueurs :</h3>
-        <select id="joueurs" size="15"></select>
-    </div>
-    <div class="content">
-        <h2 id="nom"></h2>
-        <div class="player-info">
-            <img id="photo" alt="Image joueur">
-            <div class="player-details">
-                <div class="info"><strong>Date naissance :</strong> <label id="dateNaissance"></label></div>
-                <div class="info"><strong>Numéro :</strong> <label id="numero"></label></div>
-                <div class="info"><strong>Poste :</strong> <label id="position"></label></div>
-                <div class="info"><strong>Nombre de titres :</strong><label id="nbrTitre"></label></div>
-                <div class="info"><strong>Nombre de buts :</strong> <label id="nbrBut"></label></div>
-                <div class="info"><strong>Salaire (million) :</strong> <label id="salaire"></label></div>
+        .dropbtn {
+            background-color: #f5f5f5;
+            border: 1px solid #ccc;
+            padding: 10px;
+            cursor: pointer;
+            min-width: 120px;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 120px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown:hover .dropbtn {
+            background-color: #e5e5e5;
+        }
+        
+        .main-content {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .matches {
+            border: 1px solid #000;
+            padding: 15px;
+            width: 400px;
+        }
+        
+        .match-title {
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .match-row {
+            background-color: #2c3e50;
+            color: white;
+            padding: 10px;
+            border-radius: 25px;
+            margin: 10px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .standings {
+            flex-grow: 1;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: center;
+        }
+        
+        th {
+            background-color: #f5f5f5;
+        }
+        
+        .login-section {
+            margin-top: 20px;
+        }
+        
+        .login-field {
+            margin: 10px 0;
+        }
+        
+        input[type="text"], input[type="password"] {
+            width: 200px;
+            padding: 5px;
+            margin-top: 5px;
+        }
+        
+        button {
+            background-color: #f5f5f5;
+            border: 1px solid #ccc;
+            padding: 5px 15px;
+            margin: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="title">SwissHockey</div>
+        <div class="dropdown">
+            <button class="dropbtn">Menu ▼</button>
+            <div class="dropdown-content">
+                <a href="#">Home</a>
+                <a href="#">Equipe</a>
+                <a href="#">Joueur</a>
+                <a href="#">Match</a>
             </div>
         </div>
     </div>
-</div>
+    
+    <div class="main-content">
+        <div class="left-section">
+            <div class="matches">
+                <div class="match-title">Match du jour:</div>
+                <div class="match-row">
+                    <span>Equipe X</span>
+                    <span>heure</span>
+                    <span>Equipe Y</span>
+                </div>
+                <div class="match-row">
+                    <span>Equipe X</span>
+                    <span>heure</span>
+                    <span>Equipe Y</span>
+                </div>
+                <div class="match-row">
+                    <span>Equipe X</span>
+                    <span>heure</span>
+                    <span>Equipe Y</span>
+                </div>
+                <div class="match-row">
+                    <span>Equipe X</span>
+                    <span>heure</span>
+                    <span>Equipe Y</span>
+                </div>
+            </div>
+            
+            <div class="login-section">
+                <div class="login-field">
+                    <label>nom d'utilisateur:</label>
+                    <input type="text" placeholder="Placeholder">
+                </div>
+                <div class="login-field">
+                    <label>Mot de passe:</label>
+                    <input type="password" placeholder="Placeholder">
+                </div>
+                <button>Connexion</button>
+                <button>Déconnexion</button>
+            </div>
+        </div>
+        
+        <div class="standings">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Classement</th>
+                        <th>GP</th>
+                        <th>G</th>
+                        <th>PTS</th>
+                        <th>P/GP</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1 Equipe X</td>
+                        <td>X</td>
+                        <td>X</td>
+                        <td>X</td>
+                        <td>X</td>
+                    </tr>
+                    <!-- Répété 14 fois pour les équipes 1-14 -->
+                    <tr>
+                        <td>14 Equipe X</td>
+                        <td>X</td>
+                        <td>X</td>
+                        <td>X</td>
+                        <td>X</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
