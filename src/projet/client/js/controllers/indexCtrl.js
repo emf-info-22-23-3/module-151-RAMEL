@@ -8,26 +8,35 @@ $().ready(function () {
   class IndexCtrl {
     constructor() {
       this.vue = new VueService();
-      this.loadAccueil();
+      this.loadAccueilNonAuthentifie();
     }
   
     afficherErreurHttp(msg) {
       alert(msg);
     }
   
-    // avec arrow function
-    loadMatch(fkEquipe) {
-      this.vue.chargerVue("match", function () {
-        new MatchCtrl(fkEquipe);
-      });
-    }
-  
     // avec function classique
-    loadAccueil() {
-      this.vue.chargerVue("accueil", () => new acceuilNonAuthentifieCtrl());
+    loadAccueilNonAuthentifie() {
+      this.vue.chargerVue("acceuilNonAuthentifie", () => new acceuilNonAuthentifieCtrl());
     }
-  
-    loadCarte() {
-      this.vue.chargerVue("carte", () => new CarteCtrl());
+
+    loadAccueilAuthentifie() {
+      this.vue.chargerVue("acceuilAuthentifie", () => new acceuilNonAuthentifieCtrl());
+    }
+
+    loadEquipeNonAuthentifie() {
+      this.vue.chargerVue("equipeNonAuthentifie", () => new acceuilNonAuthentifieCtrl());
+    }
+
+    loadEquipeAuthentifie() {
+      this.vue.chargerVue("equipeAuthentifie", () => new acceuilNonAuthentifieCtrl());
+    }
+
+    loadJoueurNonAuthentifie() {
+      this.vue.chargerVue("joueurNonAuthentifie", () => new acceuilNonAuthentifieCtrl());
+    }
+
+    loadJoueurAuthentifie() {
+      this.vue.chargerVue("joueurAuthentifie", () => new acceuilNonAuthentifieCtrl());
     }
   }

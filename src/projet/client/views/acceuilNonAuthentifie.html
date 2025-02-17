@@ -3,133 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>SwissHockey</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: start;
-            margin-bottom: 20px;
-        }
-        
-        .title {
-            font-size: 24px;
-            font-weight: bold;
-        }
-        
-        .dropdown {
-            position: relative;
-            display: inline-block;
-        }
-
-        .dropbtn {
-            background-color: #f5f5f5;
-            border: 1px solid #ccc;
-            padding: 10px;
-            cursor: pointer;
-            min-width: 120px;
-        }
-
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: #f9f9f9;
-            min-width: 120px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            z-index: 1;
-        }
-
-        .dropdown-content a {
-            color: black;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-        }
-
-        .dropdown-content a:hover {
-            background-color: #f1f1f1;
-        }
-
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
-
-        .dropdown:hover .dropbtn {
-            background-color: #e5e5e5;
-        }
-        
-        .main-content {
-            display: flex;
-            gap: 20px;
-        }
-        
-        .matches {
-            border: 1px solid #000;
-            padding: 15px;
-            width: 400px;
-        }
-        
-        .match-title {
-            font-weight: bold;
-            margin-bottom: 15px;
-        }
-        
-        .match-row {
-            background-color: #2c3e50;
-            color: white;
-            padding: 10px;
-            border-radius: 25px;
-            margin: 10px 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .standings {
-            flex-grow: 1;
-        }
-        
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        
-        th, td {
-            border: 1px solid #ccc;
-            padding: 8px;
-            text-align: center;
-        }
-        
-        th {
-            background-color: #f5f5f5;
-        }
-        
-        .login-section {
-            margin-top: 20px;
-        }
-        
-        .login-field {
-            margin: 10px 0;
-        }
-        
-        input[type="text"], input[type="password"] {
-            width: 200px;
-            padding: 5px;
-            margin-top: 5px;
-        }
-        
-        button {
-            background-color: #f5f5f5;
-            border: 1px solid #ccc;
-            padding: 5px 15px;
-            margin: 5px;
-            cursor: pointer;
-        }
-    </style>
 </head>
 <body>
     <div class="header">
@@ -137,10 +10,10 @@
         <div class="dropdown">
             <button class="dropbtn">Menu ▼</button>
             <div class="dropdown-content">
-                <a href="#">Home</a>
-                <a href="#">Equipe</a>
-                <a href="#">Joueur</a>
-                <a href="#">Match</a>
+                <a href="javascript:indexCtrl.loadAccueilNonAuthentifie();">Home</a>
+                <a href="javascript:indexCtrl.loadEquipeNonAuthentifie();">Equipe</a>
+                <a href="javascript:indexCtrl.loadJoueurNonAuthentifie();">Joueur</a>
+                <a href="javascript:indexCtrl.loadMatchNonAuthentifie();">Match</a>
             </div>
         </div>
     </div>
@@ -181,7 +54,6 @@
                     <input type="password" placeholder="Placeholder">
                 </div>
                 <button>Connexion</button>
-                <button>Déconnexion</button>
             </div>
         </div>
         
