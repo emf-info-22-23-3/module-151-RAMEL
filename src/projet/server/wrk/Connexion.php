@@ -1,5 +1,4 @@
 <?php
-include_once('configConnexion.php');
 class Connection {
 	private $pdo;
 	

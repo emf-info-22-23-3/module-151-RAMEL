@@ -27,7 +27,7 @@ $().ready(function () {
     loadEquipeNonAuthentifie() {
       this.vue.chargerVue("equipeNonAuthentifie", () => new acceuilNonAuthentifieCtrl());
     }
-
+    
     loadEquipeAuthentifie() {
       this.vue.chargerVue("equipeAuthentifie", () => new acceuilNonAuthentifieCtrl());
     }
