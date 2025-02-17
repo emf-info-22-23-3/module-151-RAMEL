@@ -8,7 +8,7 @@ $().ready(function () {
   class IndexCtrl {
     constructor() {
       this.vue = new VueService();
-      this.loadAccueilNonAuthentifie();
+      this.loadAccueil();
     }
   
     afficherErreurHttp(msg) {
@@ -16,27 +16,15 @@ $().ready(function () {
     }
   
     // avec function classique
-    loadAccueilNonAuthentifie() {
-      this.vue.chargerVue("acceuilNonAuthentifie", () => new acceuilNonAuthentifieCtrl());
+    loadAccueil() {
+      this.vue.chargerVue("acceuil", () => new acceuilCtrl());
     }
 
-    loadAccueilAuthentifie() {
-      this.vue.chargerVue("acceuilAuthentifie", () => new acceuilNonAuthentifieCtrl());
+    loadEquipe() {
+      this.vue.chargerVue("equipe", () => new equipeCtrl());
     }
 
-    loadEquipeNonAuthentifie() {
-      this.vue.chargerVue("equipeNonAuthentifie", () => new acceuilNonAuthentifieCtrl());
-    }
-    
-    loadEquipeAuthentifie() {
-      this.vue.chargerVue("equipeAuthentifie", () => new acceuilNonAuthentifieCtrl());
-    }
-
-    loadJoueurNonAuthentifie() {
-      this.vue.chargerVue("joueurNonAuthentifie", () => new acceuilNonAuthentifieCtrl());
-    }
-
-    loadJoueurAuthentifie() {
-      this.vue.chargerVue("joueurAuthentifie", () => new acceuilNonAuthentifieCtrl());
+    loadJoueur() {
+      this.vue.chargerVue("joueur", () => new joueurCtrl());
     }
   }

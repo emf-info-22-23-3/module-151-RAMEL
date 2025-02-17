@@ -1,4 +1,4 @@
-class acceuilNonAuthentifieCtrl {
+class acceuilCtrl {
     constructor() {
       http.equipe((data) => this.Select(data));
       
