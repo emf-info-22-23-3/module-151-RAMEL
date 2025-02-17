@@ -85,10 +85,10 @@ CREATE TABLE IF NOT EXISTS `T_Position` (
 );
 
 --
--- Contenu de la table `T_Equipe`
+-- Contenu de la table `T_Position`
 --
 
-INSERT INTO `T_Equipe` (`position`) VALUES
+INSERT INTO `T_Position` (`position`) VALUES
 ('F'),
 ('D'),
 ('G'),
