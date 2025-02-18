@@ -1,0 +1,4 @@
+class equipeCtrl {
+    constructor() {
+    }
+}
