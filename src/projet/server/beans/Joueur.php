@@ -34,7 +34,7 @@
 
     public function getPkJoueur()
     {
-      return $this->joueur;
+      return $this->pk_joueur;
     }
 
     public function getNom()

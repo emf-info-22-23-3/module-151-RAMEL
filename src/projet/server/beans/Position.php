@@ -13,12 +13,12 @@
     
     public function getPkPosition()
     {
-      return $this->position;
+      return $this->pk_position;
     }
 
     public function getPosition()
     {
-      return $this->nom;
+      return $this->position;
     }
 
     public function toXML()

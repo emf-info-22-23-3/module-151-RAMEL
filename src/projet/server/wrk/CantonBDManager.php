@@ -1,42 +1,41 @@
 <?php 
 	include_once('Connexion.php');
-	include_once('beans/Canton.php');
         
 	class  CantonBDManager
 	{
 		/**
-		* Fonction permettant la lecture des canton.
-		* Cette fonction permet de retourner la liste des canton se trouvant dans la liste
+		* Fonction permettant la lecture des cantons.
+		* Cette fonction permet de retourner la liste des cantons se trouvant dans la liste
 		*
-		* @return liste de Pays
+		* @return liste de canton
 		*/
-		public function readPays()
+		public function readCanton()
 		{
 			$count = 0;
 			$liste = array();
 			$connection = Connexion::getInstance();
-			$query = $connection->selectQuery("select * from T_Canton order by Nom", array());
+			$query = $connection->selectQuery("select * from T_Canton", array());
 			foreach($query as $data){
 				$canton = new Canton($data['PK_Canton'], $data['nom'], $data['abreviation']);
-				$liste[$count++] = $pays;
+				$liste[$count++] = $canton;
 			}	
 			return $liste;	
 		}
 		
 		/**
-		* Fonction permettant de retourner la liste des pays en XML.
+		* Fonction permettant de retourner la liste des cantons en XML.
 		*
-		* @return String. Liste des pays en XML
+		* @return String. Liste des cantons en XML
 		*/
 		public function getInXML()
 		{
-			$listPays = $this->readPays();
-			$result = '<listePays>';
-			for($i=0;$i<sizeof($listPays);$i++) 
+			$listCanton = $this->readCanton();
+			$result = '<listeCanton>';
+			for($i=0;$i<sizeof($listCanton);$i++) 
 			{
-				$result = $result .$listPays[$i]->toXML();
+				$result = $result .$listCanton[$i]->toXML();
 			}
-			$result = $result . '</listePays>';
+			$result = $result . '</listeCanton>';
 			return $result;
 		}
 	}

@@ -1,7 +1,6 @@
 <?php 
   class Equipe
   {
-
     private $pk_equipe;
 
     private $nom;
@@ -24,12 +23,12 @@
       $this->dateCreation = $dateCreation;
       $this->photo = $photo;
       $this->trophe = $trophe;
-      $this->nfkCantonom = $fkCanton;
+      $this->fkCanton = $fkCanton;
     }
 
     public function getPkEquipe()
     {
-      return $this->equipe;
+      return $this->pk_equipe;
     }
 
     public function getNom()

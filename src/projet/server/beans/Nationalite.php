@@ -5,18 +5,18 @@
 
     private $nationalite;
 
-    public function __construct($pk_nationalite, $nom)
+    public function __construct($pk_nationalite, $nationalite)
     {
       $this->nationalite = $nationalite;
       $this->pk_nationalite = $pk_nationalite;    
     }
 
-    public function getNationalite()
+    public function getPkNationalite()
     {
-      return $this->nationalite;
+      return $this->pk_nationalite;
     }
 
-    public function getPkNationalite()
+    public function getNationalite()
     {
       return $this->nationalite;
     }

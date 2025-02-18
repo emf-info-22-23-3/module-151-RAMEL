@@ -16,7 +16,7 @@
     
     public function getPkCanton()
     {
-      return $this->canton;
+      return $this->pk_canton;
     }
     
     public function getNom()
