@@ -1,20 +1,69 @@
-class acceuilCtrl {
+class joueurCtrl {
     constructor(){
-
+      $.getScript("js/beans/joueur.js");
+      http.chargerJoueur(this.chargerJoueurSuccess, this.chargerJoueurError);
     }
 
-    chargerMessagesSuccess(data, text, jqXHR) {   
-        var txt = '';
-	    var messages = data['messages'];
-        for (var i = 0; i < messages.length; i++) {
-		    var auteur = messages[i]["auteur"];
-		    var corps = messages[i]["corps"]; 
-		    $('#tableContent').append("<tr><td>" + auteur + "</td><td>" + corps + "</td></tr>");
-	    }
+    /**chargerJoueurSuccess(data, text, jqXHR) {   
+        var joueurs = data['joueurs'];
+        for (var i = 0; i < joueurs.length; i++) {
+            var nom = messages[i]["nom"];
+            var prenom = messages[i]["prenom"]; 
+            var dateNaissance = messages[i]["dateNaissance"]; 
+            var photo = messages[i]["photo"]; 
+            var description = messages[i]["description"]; 
+            var fkPosition = messages[i]["fkPosition"]; 
+            var fkEquipe = messages[i]["fkEquipe"]; 
+            var fkNationalite = messages[i]["fkNationalite"]; 
+            document.getElementById("nom").textContent = $(this).find("nom").text();
+            document.getElementById("prenom").textContent = prenom;
+            document.getElementById("dateNaissance").textContent = dateNaissance;
+            document.getElementById("description").textContent = description;
+            document.getElementById("position").textContent = fkPosition;
+            document.getElementById("equipe").textContent = fkEquipe;
+            document.getElementById("nationalite").textContent = fkNationalite;
+            document.getElementById("photo").src = photo;
+        }
+    }**/
+
+    chargerJoueurSuccess(data, text, jqXHR) {   
+        $(data).find("joueur").each(function () {
+            var j = new joueur();
+            j.setNom($(this).find("nom").text());
+            j.setPrenom($(this).find("prenom").text());
+            j.setDatenaissance($(this).find("dateNaissance").text());
+            j.setPhoto($(this).find("photo").text());
+            j.setDescription($(this).find("description").text());
+            j.setFkPosition($(this).find("fkPosition").text());
+            j.setFkEquipe($(this).find("fkEquipe").text());
+            j.setFkNationalite($(this).find("fkNationalite").text());
+            document.getElementById("nom").textContent = j.getNom;
+            document.getElementById("prenom").textContent = j.getPrenon;
+            document.getElementById("dateNaissance").textContent = j.getDateNaissance;
+            document.getElementById("description").textContent = j.getDescription;
+            document.getElementById("position").textContent = j.getFkPosition;
+            document.getElementById("equipe").textContent = j.getFkEquipe;
+            document.getElementById("nationalite").textContent = j.getFkNationalite;
+            document.getElementById("photo").src = j.getPhoto;
+        });
+        afficheInfoJoueur();
     }
 
-    chargerMessagesError(request, status, error) {
-        alert("Erreur lors de la lecture des messages: " + error);
+    afficheInfoJoueur(event) {
+      var cmbJoueurs = document.getElementById("cmbJoueur");
+      var joueurJson = JSON.parse(cmbJoueurs.value);
+      document.getElementById("nom").textContent = joueurJson.nom;
+      document.getElementById("prenom").textContent = joueurJson.datenaissance;
+      document.getElementById("dateNaissance").textContent = joueurJson.salaire;
+      document.getElementById("description").textContent = joueurJson.nbrBut;
+      document.getElementById("position").textContent = joueurJson.nbrTitre;
+      document.getElementById("equipe").textContent = joueurJson.numero;
+      document.getElementById("nationalite").textContent = joueurJson.fk_position;
+      document.getElementById("photo").src = joueurJson.fk_photo;
+  }
+
+    chargerJoueurError(request, status, error) {
+        alert("Erreur lors de la lecture des joueurs: " + error);
     }
 
     addMessagesSuccess(data, text, jqXHR) {   
@@ -30,21 +79,4 @@ class acceuilCtrl {
     addMessagesError(request, status, error) {
         alert("Erreur lors de l'ajout du message: " + error);
     }
-
-    
-
-$(document).ready(function() {
-  $.getScript("javascripts/helpers/dateHelper.js", function() {
-    console.log("dateHelper.js chargé !");
-  });
-  $.getScript("javascripts/services/servicesHttp.js", function() {
-    console.log("servicesHttp.js chargé !");
-    chargerJoueur(chargerMessagesSuccess, chargerMessagesError);
-  });
-  $("#ajouter").click(function(){ 
-	var auteur = document.getElementById("txtAuteur").value;
-	var message = document.getElementById("txtMessage").value;
-	ajouterMessage(auteur, message, addMessagesSuccess, addMessagesError);
-  });
-});
 }

@@ -1,4 +1,4 @@
-var BASE_URL = "http://localhost:8080/projet/server/ctrl/";
+var BASE_URL = "http://localhost:8080/projet/server/";
 
 class servicesHttp {
 
@@ -17,12 +17,11 @@ class servicesHttp {
       });
     }
 
-    chargerJoueur(fk_equipe,successCallback, errorCallback){
+    chargerJoueur(successCallback, errorCallback){
       $.ajax({
         type: "GET",
         dataType: "xml",
         url: BASE_URL + "joueurManager.php",
-        data:'FK_equipe=' + fk_equipe,
         success: successCallback,
         error: errorCallback
       });
