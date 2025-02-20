@@ -6,8 +6,8 @@
 	{
 		if ($_SERVER['REQUEST_METHOD'] == 'GET')
 		{
-			$paysBD = new NationaliteBDManager();
-			echo $paysBD->getInXML();
+			$nationaliteBD = new NationaliteBDManager();
+			echo $nationaliteBD->getInXML();
 		}
 	}
 ?>

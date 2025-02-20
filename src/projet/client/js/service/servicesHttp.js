@@ -27,12 +27,22 @@ class servicesHttp {
       });
     }
 
-    chargerMatch(fk_equipe,successCallback, errorCallback){
+    chargerMatch(successCallback, errorCallback){
       $.ajax({
         type: "GET",
         dataType: "xml",
         url: BASE_URL + "matchManager.php",
-        data:'FK_equipe=' + fk_equipe,
+        success: successCallback,
+        error: errorCallback
+      });
+    }
+
+    connect(login, passwd, successCallback, errorCallback) {
+      $.ajax({
+        type: "POST",
+        dataType: "xml",
+        url: BASE_URL + "loginManager.php",
+        data: 'action=connect&login=' + login + '&password=' + passwd,
         success: successCallback,
         error: errorCallback
       });

@@ -6,8 +6,8 @@
 	{
 		if ($_SERVER['REQUEST_METHOD'] == 'GET')
 		{
-			$paysBD = new PositionBDManager();
-			echo $paysBD->getInXML();
+			$positionBD = new PositionBDManager();
+			echo $positionBD->getInXML();
 		}
 	}
 ?>

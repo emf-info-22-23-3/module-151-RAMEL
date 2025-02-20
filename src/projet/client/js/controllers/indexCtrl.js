@@ -29,6 +29,6 @@ $().ready(function () {
     }
 
     loadMatch() {
-      this.vue.chargerVue("match", () => new joueurCtrl());
+      this.vue.chargerVue("match", () => new matchCtrl());
     }
   }

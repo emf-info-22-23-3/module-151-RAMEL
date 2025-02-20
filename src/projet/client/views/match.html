@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <div class="header">
+        <div class="title">SwissHockey</div>
+        <div class="dropdown">
+            <button class="dropbtn">Menu ▼</button>
+            <div class="dropdown-content">
+                <a href="javascript:indexCtrl.loadAccueil();">Home</a>
+                <a href="javascript:indexCtrl.loadEquipe();">Equipe</a>
+                <a href="javascript:indexCtrl.loadJoueur();">Joueur</a>
+                <a href="javascript:indexCtrl.loadMatch();">Match</a>
+            </div>
+        </div>
+    </div>
+
+    <h1 class="page-title">Match</h1>
+
+    <div class="match-container">
+        <div class="matches">
+            <div class="match-row">
+                <span>Equipe X</span>
+                <span>heure</span>
+                <span>Equipe Y</span>
+            </div>
+            <div class="match-row">
+                <span>Equipe X</span>
+                <span>heure</span>
+                <span>Equipe Y</span>
+            </div>
+            <div class="match-row">
+                <span>Equipe X</span>
+                <span>heure</span>
+                <span>Equipe Y</span>
+            </div>
+        </div>
+
+        <div class="add-match">
+            <h2>Ajouter un match:</h2>
+            <form class="add-match-form">
+                <div class="form-group">
+                    <label>Date</label>
+                    <input type="date" value="2025-04-02">
+                </div>
+                <div class="form-group">
+                    <label>Equipe local</label>
+                    <select>
+                        <option>Select</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Equipe visiteur</label>
+                    <select>
+                        <option>Select</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Heure</label>
+                    <input type="text" placeholder="Placeholder">
+                </div>
+                <button type="submit">Ajouter</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

@@ -6,8 +6,8 @@
 	{
 		if ($_SERVER['REQUEST_METHOD'] == 'GET')
 		{
-			$paysBD = new MatchBDManager();
-			echo $paysBD->getInXML();
+			$matchBD = new MatchBDManager();
+			echo $matchBD->getInXML();
 		}
 	}
 ?>
