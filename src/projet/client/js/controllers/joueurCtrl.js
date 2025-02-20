@@ -37,16 +37,15 @@ class joueurCtrl {
             j.setFkPosition($(this).find("fkPosition").text());
             j.setFkEquipe($(this).find("fkEquipe").text());
             j.setFkNationalite($(this).find("fkNationalite").text());
-            document.getElementById("nom").textContent = j.getNom;
+        });
+        document.getElementById("nom").textContent = j.getNom;
             document.getElementById("prenom").textContent = j.getPrenon;
             document.getElementById("dateNaissance").textContent = j.getDateNaissance;
             document.getElementById("description").textContent = j.getDescription;
             document.getElementById("position").textContent = j.getFkPosition;
             document.getElementById("equipe").textContent = j.getFkEquipe;
-            document.getElementById("nationalite").textContent = j.getFkNationalite;
+            document.getElementById("nationaite").textContent = j.getFkNationalite;
             document.getElementById("photo").src = j.getPhoto;
-        });
-        afficheInfoJoueur();
     }
 
     afficheInfoJoueur(event) {

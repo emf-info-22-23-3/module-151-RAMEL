@@ -1,9 +1,13 @@
+
 <?php
+
 session_start();
-class SessionManager {
+
+class SessionManager
+{
     // Démarre la session si elle n'est pas déjà démarrée
-    public function openSession($user) {
-        // Si la session n'est pas démarrée, on la démarre
+    public function openSession($user)
+    {
         if (session_status() == PHP_SESSION_NONE) {
             session_start();
         }
@@ -12,22 +16,24 @@ class SessionManager {
         $_SESSION['user'] = $user;
     }
 
-    // Détruit la session en cours
-    public function destroySession() {
+    public function destroySession()
+    {
         // On détruit la session et toutes ses variables
         session_unset();
         session_destroy();
     }
 
-    // Vérifie si l'utilisateur est connecté (si une session existe)
-    public function isConnected() {
+    // Vérifie si l'utilisateur est connecté
+    public function isConnected()
+    {
         return isset($_SESSION['user']);
     }
 
-    // Retourne l'utilisateur actuel
-    public function currentUser() {
+
+    public function currentUser()
+    {
         // Si un utilisateur est connecté, on retourne ses informations
-        return isset($_SESSION['user']) ? $_SESSION['user'] : null;
+        return isset($_SESSION['user']);
     }
 }
 
