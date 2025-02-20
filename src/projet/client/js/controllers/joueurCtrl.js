@@ -3,29 +3,48 @@ class joueurCtrl {
       http.chargerJoueur(this.chargerJoueurSuccess, this.chargerJoueurError);
     }
 
-    /**chargerJoueurSuccess(data, text, jqXHR) {   
-        var joueurs = data['joueurs'];
-        for (var i = 0; i < joueurs.length; i++) {
-            var nom = messages[i]["nom"];
-            var prenom = messages[i]["prenom"]; 
-            var dateNaissance = messages[i]["dateNaissance"]; 
-            var photo = messages[i]["photo"]; 
-            var description = messages[i]["description"]; 
-            var fkPosition = messages[i]["fkPosition"]; 
-            var fkEquipe = messages[i]["fkEquipe"]; 
-            var fkNationalite = messages[i]["fkNationalite"]; 
-            document.getElementById("nom").textContent = $(this).find("nom").text();
-            document.getElementById("prenom").textContent = prenom;
-            document.getElementById("dateNaissance").textContent = dateNaissance;
-            document.getElementById("description").textContent = description;
-            document.getElementById("position").textContent = fkPosition;
-            document.getElementById("equipe").textContent = fkEquipe;
-            document.getElementById("nationalite").textContent = fkNationalite;
-            document.getElementById("photo").src = photo;
-        }
-    }**/
-
     chargerJoueurSuccess(data, text, jqXHR) {   
+        // Vider le conteneur pour éviter les doublons
+        $("#content").empty();
+    
+        // Pour chaque joueur présent dans le XML
+        $(data).find("joueur").each(function () {
+            // Créer une carte en utilisant un template HTML
+            var card = $(
+                '<div class="card">' +
+                    '<div class="image">' +
+                        '<div class="placeholder-image">' +
+                            '<img alt="Image joueur" class="photo">' +
+                        '</div>' +
+                    '</div>' +
+                    '<div class="info">' +
+                        '<div class="info-line"><strong>nom :</strong> <label class="nom"></label></div>' +
+                        '<div class="info-line"><strong>prénom :</strong> <label class="prenom"></label></div>' +
+                        '<div class="info-line"><strong>Date naissance :</strong> <label class="dateNaissance"></label></div>' +
+                        '<div class="info-line"><strong>description :</strong> <label class="description"></label></div>' +
+                        '<div class="info-line"><strong>position :</strong> <label class="position"></label></div>' +
+                        '<div class="info-line"><strong>équipe :</strong> <label class="equipe"></label></div>' +
+                        '<div class="info-line"><strong>nationalité :</strong> <label class="nationalite"></label></div>' +
+                    '</div>' +
+                '</div>'
+            );
+    
+            // Remplir la carte avec les données du joueur
+            card.find(".nom").text($(this).find("nom").text());
+            card.find(".prenom").text($(this).find("prenom").text());
+            card.find(".dateNaissance").text($(this).find("dateNaissance").text());
+            card.find(".description").text($(this).find("description").text());
+            card.find(".position").text($(this).find("fkPosition").text());
+            card.find(".equipe").text($(this).find("fkEquipe").text());
+            card.find(".nationalite").text($(this).find("fkNationalite").text());
+            card.find(".photo").attr("src", $(this).find("photo").text());
+    
+            // Ajouter la carte générée dans le conteneur
+            $("#content").append(card);
+        });
+    }
+
+    /**chargerJoueurSuccess(data, text, jqXHR) {   
         $(data).find("joueur").each(function () {
             document.getElementById("nom").textContent = $(this).find("nom").text();
             document.getElementById("prenom").textContent = $(this).find("prenom").text();
@@ -35,7 +54,7 @@ class joueurCtrl {
             document.getElementById("equipe").textContent = $(this).find("equipe").text();
             document.getElementById("photo").src = "https://ramela.emf-informatique.ch/151/img/EVZ.png";
         });
-    }
+    }**/
 
     /**chargerJoueurSuccess(data, text, jqXHR) {   
         $(data).find("joueur").each(function () {
@@ -59,34 +78,7 @@ class joueurCtrl {
         });
     }**/
 
-    afficheInfoJoueur(event) {
-      var cmbJoueurs = document.getElementById("cmbJoueur");
-      var joueurJson = JSON.parse(cmbJoueurs.value);
-      document.getElementById("nom").textContent = joueurJson.nom;
-      document.getElementById("prenom").textContent = joueurJson.datenaissance;
-      document.getElementById("dateNaissance").textContent = joueurJson.salaire;
-      document.getElementById("description").textContent = joueurJson.nbrBut;
-      document.getElementById("position").textContent = joueurJson.nbrTitre;
-      document.getElementById("equipe").textContent = joueurJson.numero;
-      document.getElementById("nationalite").textContent = joueurJson.fk_position;
-      document.getElementById("photo").src = joueurJson.fk_photo;
-  }
-
     chargerJoueurError(request, status, error) {
         alert("Erreur lors de la lecture des joueurs: " + error);
-    }
-
-    addMessagesSuccess(data, text, jqXHR) {   
-        var txt = data['result'];
-        if(txt) {
-		    location.reload();
-	    }
-	    else{
-		    alert("Erreur lors de l'ajout");
-	    }	
-    }
-
-    addMessagesError(request, status, error) {
-        alert("Erreur lors de l'ajout du message: " + error);
     }
 }
