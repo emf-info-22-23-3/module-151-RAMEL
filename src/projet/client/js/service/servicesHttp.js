@@ -37,12 +37,58 @@ class servicesHttp {
       });
     }
 
+    chargerCanton(fkCanton, successCallback, errorCallback){
+      $.ajax({
+        type: "GET",
+        dataType: "xml",
+        url: BASE_URL + "cantonManager.php",
+        data: 'FK_canton=' + fkCanton,
+        success: successCallback,
+        error: errorCallback
+      });
+    }
+
     connect(login, passwd, successCallback, errorCallback) {
       $.ajax({
         type: "POST",
         dataType: "xml",
         url: BASE_URL + "loginManager.php",
         data: 'action=connect&login=' + login + '&password=' + passwd,
+        success: successCallback,
+        error: errorCallback
+      });
+    }
+
+    modifierJoueur (nom, prenom, dateNaissance, description, fkPosition, fkEquipe, fkNationalite, pk_joueur,successCallback, errorCallback){
+      $.ajax({
+        type: "PUT",
+        dataType: "xml",
+        url: BASE_URL + "joueurManager.php",
+        data: 'action=ajouter&nom=' + nom + '&prenom=' + prenom + '&dateNaissance=' + dateNaissance + '&description=' + description + 
+        '&fkPosition=' + fkPosition + '&fkEquipe=' + fkEquipe + '&fkNationalite=' + fkNationalite + "&pk_joueur" + pk_joueur,
+        success: successCallback,
+        error: errorCallback
+      });
+    }
+
+    modifierEquipe (nom, abreviation, dateCreation, trophe, fkCanton, pk_equipe,successCallback, errorCallback){
+      $.ajax({
+        type: "PUT",
+        dataType: "xml",
+        url: BASE_URL + "joueurManager.php",
+        data: 'action=ajouter&nom=' + nom + '&abreviation=' + abreviation + '&dateCreation=' + dateCreation + '&trophe=' + trophe + 
+        '&fkCanton=' + fkCanton + '&pk_equipe=' + pk_equipe,
+        success: successCallback,
+        error: errorCallback
+      });
+    }
+
+    ajouterMatch (date, heure, fkEquipeDom, fkEquipeVIS, successCallback, errorCallback) {
+      $.ajax({
+        type: "POST",
+        dataType: "xml",
+        url: BASE_URL,
+        data: 'action=ajouter&date=' + date + '&heure=' + heure + '&fkEquipeDom=' + fkEquipeDom + '&fkEquipeVIS=' + fkEquipeVIS,
         success: successCallback,
         error: errorCallback
       });

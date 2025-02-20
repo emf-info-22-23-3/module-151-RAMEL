@@ -14,9 +14,13 @@
 			$count = 0;
 			$liste = array();
 			$connection = Connexion::getInstance();
-			$query = $connection->selectQuery("select * from T_Equipe", array());
+			$query = $connection->selectQuery(
+				"SELECT T_Equipe.*, T_Canton.nom AS canton
+				 FROM T_Equipe
+				 LEFT JOIN T_Canton ON T_Equipe.fkCanton = T_Canton.PK_Canton", 
+				array());
 			foreach($query as $data){
-				$equipe = new Equipe($data['PK_Equipe'], $data['nom'], $data['abreviation'], $data['dateCreation'], $data['photo'], $data['trophe'], $data['fkCanton']);
+				$equipe = new Equipe($data['PK_Equipe'], $data['nom'], $data['abreviation'], $data['dateCreation'], $data['photo'], $data['trophe'], $data['canton']);
 				$liste[$count++] = $equipe;
 			}	
 			return $liste;	
