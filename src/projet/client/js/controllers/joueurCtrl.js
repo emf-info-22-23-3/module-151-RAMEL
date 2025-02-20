@@ -1,6 +1,5 @@
 class joueurCtrl {
     constructor(){
-      $.getScript("js/beans/joueur.js");
       http.chargerJoueur(this.chargerJoueurSuccess, this.chargerJoueurError);
     }
 
@@ -28,25 +27,37 @@ class joueurCtrl {
 
     chargerJoueurSuccess(data, text, jqXHR) {   
         $(data).find("joueur").each(function () {
+            document.getElementById("nom").textContent = $(this).find("nom").text();
+            document.getElementById("prenom").textContent = $(this).find("prenom").text();
+            document.getElementById("dateNaissance").textContent = $(this).find("dateNaissance").text();
+            document.getElementById("description").textContent = $(this).find("description").text();
+            document.getElementById("position").textContent = $(this).find("position").text();
+            document.getElementById("equipe").textContent = $(this).find("equipe").text();
+            document.getElementById("photo").src = "https://ramela.emf-informatique.ch/151/img/EVZ.png";
+        });
+    }
+
+    /**chargerJoueurSuccess(data, text, jqXHR) {   
+        $(data).find("joueur").each(function () {
             var j = new joueur();
             j.setNom($(this).find("nom").text());
             j.setPrenom($(this).find("prenom").text());
-            j.setDatenaissance($(this).find("dateNaissance").text());
+            j.setDateNaissance($(this).find("dateNaissance").text());
             j.setPhoto($(this).find("photo").text());
             j.setDescription($(this).find("description").text());
             j.setFkPosition($(this).find("fkPosition").text());
             j.setFkEquipe($(this).find("fkEquipe").text());
             j.setFkNationalite($(this).find("fkNationalite").text());
-        });
-        document.getElementById("nom").textContent = j.getNom;
+            document.getElementById("nom").textContent = j.getNom;
             document.getElementById("prenom").textContent = j.getPrenon;
             document.getElementById("dateNaissance").textContent = j.getDateNaissance;
             document.getElementById("description").textContent = j.getDescription;
             document.getElementById("position").textContent = j.getFkPosition;
             document.getElementById("equipe").textContent = j.getFkEquipe;
-            document.getElementById("nationaite").textContent = j.getFkNationalite;
-            document.getElementById("photo").src = j.getPhoto;
-    }
+            //document.getElementById("nationaite").textContent = j.getFkNationalite;
+            //document.getElementById("photo").src = j.getPhoto;
+        });
+    }**/
 
     afficheInfoJoueur(event) {
       var cmbJoueurs = document.getElementById("cmbJoueur");

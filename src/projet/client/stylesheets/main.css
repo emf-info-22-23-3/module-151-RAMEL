@@ -146,32 +146,32 @@ button {
 
 .image {
     width: 100%;
-    height: 200px;
+    height: 300px;
     background-color: #ddd;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.team-info {
+.info {
     padding: 15px;
 }
 
-.team-info-line {
+.info-line {
     height: 10px;
     margin: 8px 0;
     width: 90%;
 }
 
-.team-info-line:nth-child(2) {
+.info-line:nth-child(2) {
     width: 70%;
 }
 
-.team-info-line:nth-child(3) {
+.info-line:nth-child(3) {
     width: 85%;
 }
 
-.team-info-line:last-child {
+.info-line:last-child {
     width: 60%;
 }
 

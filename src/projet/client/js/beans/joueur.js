@@ -1,4 +1,5 @@
 class joueur {
+
     setNom(nom) {
         this.nom = nom;
     }
