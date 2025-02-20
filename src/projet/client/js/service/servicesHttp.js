@@ -37,17 +37,6 @@ class servicesHttp {
       });
     }
 
-    chargerCanton(fkCanton, successCallback, errorCallback){
-      $.ajax({
-        type: "GET",
-        dataType: "xml",
-        url: BASE_URL + "cantonManager.php",
-        data: 'FK_canton=' + fkCanton,
-        success: successCallback,
-        error: errorCallback
-      });
-    }
-
     connect(login, passwd, successCallback, errorCallback) {
       $.ajax({
         type: "POST",
