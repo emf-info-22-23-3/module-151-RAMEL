@@ -1,6 +1,24 @@
 class acceuilCtrl {
   constructor(){
+    var butConnect = document.getElementById("connexion");
+
     http.chargerMatch(this.chargerMatchSuccess, this.chargerMatchError);
+
+    butConnect.addEventListener("click", () => {
+      http.connect(document.getElementById("username").value, document.getElementById("pwd").value, this.connectSuccess, this.gestionErreurLogin);
+    });
+  }
+
+  connectSuccess(data, text, jqXHR) {
+    if ($(data).find("result").text() != null) {
+        alert("Login ok");
+        sessionStorage.setItem("isConnected", "true");
+        indexCtrl.loadAuthentifie();
+    }
+    else {
+        alert("Erreur lors du login");
+    }
+
   }
 
   chargerMatchSuccess(data, text, jqXHR) {
@@ -40,4 +58,9 @@ class acceuilCtrl {
     console.error(error);
       alert("Erreur lors de la lecture des matchs: " + error);
   }
+
+  gestionErreurLogin(xhr, status, error) {
+    console.error("Erreur lors de votre login : ", status, error);
+    alert("une erreur est survenue lors de votre login");
+}
 }

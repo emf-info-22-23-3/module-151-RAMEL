@@ -16,7 +16,7 @@ if (isset($_SERVER['REQUEST_METHOD'])) {
 
             $result = $loginBD->checkLogin($username);
             if ($result !== null) {
-                if (password_verify($password, $result['MotDePasse'])) {
+                if (password_verify($password, $result['password'])) {
                      
                     $sessionManager->openSession($username);
                     echo '<result>'.$sessionManager->currentUser().'</result>';

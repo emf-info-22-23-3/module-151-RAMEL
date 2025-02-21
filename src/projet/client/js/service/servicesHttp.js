@@ -37,12 +37,12 @@ class servicesHttp {
       });
     }
 
-    connect(login, passwd, successCallback, errorCallback) {
+    connect(login, password, successCallback, errorCallback) {
       $.ajax({
         type: "POST",
         dataType: "xml",
         url: BASE_URL + "loginManager.php",
-        data: 'action=connect&login=' + login + '&password=' + passwd,
+        data: 'action=connect&login=' + login + '&password=' + password,
         success: successCallback,
         error: errorCallback
       });
