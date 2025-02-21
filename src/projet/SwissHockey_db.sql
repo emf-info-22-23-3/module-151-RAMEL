@@ -381,7 +381,7 @@ CREATE TABLE IF NOT EXISTS `T_Match` (
   `heure` VARCHAR(5) NOT NULL,
   `goalDom` INT NULL,
   `goalVisit` INT NULL,
-  `fkEquipeDom` INT NOT NULL,
+  `fkEquipeDOM` INT NOT NULL,
   `fkEquipeVIS` INT NOT NULL,
   PRIMARY KEY (`PK_Match`),
   INDEX `fk_T_Match_T_Equipe1_idx` (`fkEquipeDom` ASC) VISIBLE,
