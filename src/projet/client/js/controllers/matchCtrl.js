@@ -8,10 +8,11 @@ class matchCtrl {
         document.getElementById("equipeDOM").textContent = $(this).find("fkEquipeDom").text();
         document.getElementById("heure").textContent = $(this).find("heure").text();
         document.getElementById("equipeVIS").textContent = $(this).find("fkEquipeVIS").text();
-    });
+      });
     }
 
-    chargerEqchargerMatchErroruipeError(request, status, error) {
+    chargerMatchError(request, status, error) {
+      console.error(error);
         alert("Erreur lors de la lecture des matchs: " + error);
     }
 }

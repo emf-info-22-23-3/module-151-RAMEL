@@ -2,6 +2,7 @@
 	include_once('Connexion.php');        
 	class  MatchBDManager
 	{
+
 		/**
 		* Fonction permettant la lecture des matchs.
 		* Cette fonction permet de retourner la liste des matchs se trouvant dans la liste
@@ -12,9 +13,8 @@
 			$count = 0;
 			$liste = array();
 			$connection = Connexion::getInstance();
-			$query = $connection->selectQuery("select * from T_Match", array());
+			$query = $connection->selectQuery("SELECT * FROM T_Match", array());
 			foreach($query as $data){
-                print_r($data);
 				$match = new MatchDB($data['PK_Match'], $data['date'], $data['heure'], $data['goalDom'], $data['goalVisit'], $data['fkEquipeDom'], $data['fkEquipeVIS']);
 				$liste[$count++] = $match;
 			}	
