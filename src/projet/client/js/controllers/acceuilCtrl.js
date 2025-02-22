@@ -8,6 +8,8 @@ class acceuilCtrl {
     butConnect.addEventListener("click", () => {
       http.connect(document.getElementById("username").value, document.getElementById("pwd").value, this.connectSuccess, this.gestionErreurLogin);
     });
+
+    document.getElementById("deconnexion").style.display = "none";
   }
 
   connectSuccess(data, text, jqXHR) {
@@ -15,6 +17,8 @@ class acceuilCtrl {
         alert("Login ok");
         sessionStorage.setItem("isConnected", "true");
         indexCtrl.loadAuthentifie();
+        document.getElementById("deconnexion").style.display = "visible";
+        document.getElementById("connexion").style.display = "none";
     }
     else {
         alert("Erreur lors du login");

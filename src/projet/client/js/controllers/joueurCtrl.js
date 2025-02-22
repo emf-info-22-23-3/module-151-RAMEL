@@ -1,6 +1,25 @@
 class joueurCtrl {
     constructor(){
       http.chargerJoueur(this.chargerJoueurSuccess, this.chargerJoueurError);
+      var modifier = document.getElementById("enregistrer");
+
+      http.modifierJoueur(this.chargerEquipeSuccess, this.chargerEquipeError);
+      var modifier = document.getElementById("enregistrer");
+
+      modifier.addEventListener("click", () => {
+        http.modifierJoueur(
+          document.getElementById("nom").value,
+          document.getElementById("prenom").value,
+          document.getElementById("dateNaissance").value,
+          document.getElementById("description").value,
+          document.getElementById("position").value,
+          document.getElementById("equipe").value,
+          document.getElementById("nationalite").value,
+          JSON.parse(cmbJoueurs.value).pk_joueur,
+          this.afficheModificationSuccess.bind(this),
+          this.afficheModificationErreur
+        );
+      });
     }
 
     chargerJoueurSuccess(data, text, jqXHR) {   
@@ -18,7 +37,7 @@ class joueurCtrl {
                         '</div>' +
                     '</div>' +
                     '<div class="form-group">' +
-                        '<strong>nom :<input class="nom" type="text" readonly></strong>' +
+                        '<strong>nom :<input type="text" class="nom" readonly></strong>' +
                     '</div>' +
                     '<div class="form-group">' +
                         '<strong>prénom :<input type="text" class="prenom" readonly></strong>' +
