@@ -37,6 +37,16 @@ class servicesHttp {
       });
     }
 
+    chargerClassement(successCallback, errorCallback){
+      $.ajax({
+        type: "GET",
+        dataType: "xml",
+        url: BASE_URL + "classementManager.php",
+        success: successCallback,
+        error: errorCallback
+      });
+    }
+
     connect(login, password, successCallback, errorCallback) {
       $.ajax({
         type: "POST",
