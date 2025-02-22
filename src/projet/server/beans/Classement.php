@@ -10,16 +10,13 @@
 
     private $PTS;
 
-    private $PGP;
-
-    public function __construct($pk_equipe, $nom, $GP, $G, $PTS, $PGP)
+    public function __construct($pk_equipe, $nom, $GP, $G, $PTS)
     {
       $this->pk_equipe = $pk_equipe;
       $this->nom = $nom;
       $this->GP = $GP;
       $this->G = $G;
       $this->PTS = $PTS;
-      $this->PGP = $PGP;
     }
 
     public function getPkEquipe()
@@ -46,11 +43,6 @@
     {
       return $this->PTS;
     }
-
-    public function getPGP()
-    {
-      return $this->PGP;
-    }
     
     public function toXML()
     {
@@ -60,7 +52,6 @@
       $result = $result . '<GP>'.$this->getGP().'</GP>';
       $result = $result . '<G>'.$this->getG().'</G>';
       $result = $result . '<PTS>'.$this->getPTS().'</PTS>';
-      $result = $result . '<PGP>'.$this->getPGP().'</PGP>';
       $result = $result . '</classement>';
       return $result;
     }

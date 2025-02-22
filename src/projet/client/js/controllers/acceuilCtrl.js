@@ -85,7 +85,9 @@ class acceuilCtrl {
       tableau.find(".GP").text($(this).find("GP").text());
       tableau.find(".G").text($(this).find("G").text());
       tableau.find(".PTS").text($(this).find("PTS").text());
-      tableau.find(".PGP").text($(this).find("PGP").text());
+      let nombre = $(this).find("PTS").text()/$(this).find("GP").text();
+      let formate = nombre.toFixed(3);
+      tableau.find(".PGP").text(formate);
 
       // Ajouter la carte générée dans le conteneur
       $("#classement").append(tableau);

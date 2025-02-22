@@ -56,7 +56,6 @@ CREATE TABLE IF NOT EXISTS `T_Equipe` (
   `GP` INT NOT NULL,
   `G` VARCHAR(10) NOT NULL,
   `PTS` INT NOT NULL,
-  `PGP` VARCHAR(5) NOT NULL,
   `fkCanton` INT NOT NULL,
   PRIMARY KEY (`PK_Equipe`),
   INDEX `fk_T_Equipe_T_Canton1_idx` (`fkCanton` ASC) VISIBLE,
@@ -71,21 +70,21 @@ ENGINE = InnoDB;
 -- Contenu de la table `T_Equipe`
 --
 
-INSERT INTO `T_Equipe` (`nom`, `abreviation`, `dateCreation`, `photo`, `trophe`, `GP`, `G`, `PTS`, `PGP`, `fkCanton`) VALUES
-('HC Ajoie', 'HCA', '1973-01-01', 'img/equipe/HCA.png', '', 49, '109:176', 46, '0.939', 11),
-('HC Ambrì-Piotta', 'HCAP', '1937-01-01', 'img/equipe/HCAP.png', '', 49, '136:151', 67, '1.367', 20),
-('SC Bern', 'SCB', '1931-01-01', 'img/equipe/SCB.png', '', 49, '155:134', 85, '1.735', 6),
-('EHC Biel-Bienne', 'EHCB', '1939-01-01', 'img/equipe/EHCB.png', '', 48, '118:118', 67, '1.396', 6),
-('HC Davos', 'HCD', '1921-01-01', 'img/equipe/HCD.png', '', 48, '137:118', 80, '1.667', 10),
-('HC Fribourg-Gottéron', 'HCFG', '1937-01-01', 'img/equipe/HCFG.png', '', 48, '122:119', 76, '1.583', 8),
-('Genève-Servette HC', 'GSHC', '1905-01-01', 'img/equipe/GSHC.png', '', 48, '130:143', 62, '1.292', 7),
-('EHC Kloten', 'EHCK', '1934-01-01', 'img/equipe/EHCK.png', '', 48, '122:139', 70, '1.458', 26),
-('Lausanne HC', 'LHC', '1922-01-01', 'img/equipe/LHC.png', '', 49, '151:119', 97, '1.980', 24),
-('HC Lugano', 'HCL', '1941-01-01', 'img/equipe/HCL.png', '', 49, '129:155', 60, '1.224', 20),
-('SCL Tigers', 'SCL', '1946-01-01', 'img/equipe/SCL.png', '', 48, '121:114', 70, '1.458', 6),
-('SC Rapperswil-Jona Lakers', 'SCRJ', '1945-01-01', 'img/equipe/SCRJ.png', '', 48, '129:145', 64, '1.333', 19),
-('ZSC Lions', 'ZSC', '1930-01-01', 'img/equipe/ZSC.png', '', 47, '140:103', 88, '1.872', 26),
-('EV Zug', 'EVZ', '1967-01-01', 'img/equipe/EVZ.png', '', 48, '160:125', 82, '1.708', 25);
+INSERT INTO `T_Equipe` (`nom`, `abreviation`, `dateCreation`, `photo`, `trophe`, `GP`, `G`, `PTS`, `fkCanton`) VALUES
+('HC Ajoie', 'HCA', '1973-01-01', 'img/equipe/HCA.png', '', 49, '109:176', 46, 11),
+('HC Ambrì-Piotta', 'HCAP', '1937-01-01', 'img/equipe/HCAP.png', '', 49, '136:151', 67, 20),
+('SC Bern', 'SCB', '1931-01-01', 'img/equipe/SCB.png', '', 49, '155:134', 85, 6),
+('EHC Biel-Bienne', 'EHCB', '1939-01-01', 'img/equipe/EHCB.png', '', 48, '118:118', 67, 6),
+('HC Davos', 'HCD', '1921-01-01', 'img/equipe/HCD.png', '', 48, '137:118', 80, 10),
+('HC Fribourg-Gottéron', 'HCFG', '1937-01-01', 'img/equipe/HCFG.png', '', 48, '122:119', 76, 8),
+('Genève-Servette HC', 'GSHC', '1905-01-01', 'img/equipe/GSHC.png', '', 48, '130:143', 62, 7),
+('EHC Kloten', 'EHCK', '1934-01-01', 'img/equipe/EHCK.png', '', 48, '122:139', 70, 26),
+('Lausanne HC', 'LHC', '1922-01-01', 'img/equipe/LHC.png', '', 49, '151:119', 97, 24),
+('HC Lugano', 'HCL', '1941-01-01', 'img/equipe/HCL.png', '', 49, '129:155', 60, 20),
+('SCL Tigers', 'SCL', '1946-01-01', 'img/equipe/SCL.png', '', 48, '121:114', 70, 6),
+('SC Rapperswil-Jona Lakers', 'SCRJ', '1945-01-01', 'img/equipe/SCRJ.png', '', 48, '129:145', 64, 19),
+('ZSC Lions', 'ZSC', '1930-01-01', 'img/equipe/ZSC.png', '', 47, '140:103', 88, 26),
+('EV Zug', 'EVZ', '1967-01-01', 'img/equipe/EVZ.png', '', 48, '160:125', 82, 25);
 
 -- Table T_Position
 CREATE TABLE IF NOT EXISTS `T_Position` (
