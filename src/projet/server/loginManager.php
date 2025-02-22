@@ -6,7 +6,7 @@ require_once("SessionManager.php");
 
 if (isset($_SERVER['REQUEST_METHOD'])) {
 
-    $sessionManager = new SessionManager();
+    $sessionManager = new sessionManager();
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['action'] == 'connect') {
         if (isset($_POST['login']) && isset($_POST['password'])) {

@@ -1,9 +1,6 @@
 <?php
-
 session_start();
-
-class SessionManager
-{
+class sessionManager {
     // Démarrer la session si elle n'est pas déjà démarrée
     public function openSession($user)
     {
@@ -35,5 +32,4 @@ class SessionManager
         return isset($_SESSION['user']);
     }
 }
-
 ?>

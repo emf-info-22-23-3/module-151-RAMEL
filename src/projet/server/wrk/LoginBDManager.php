@@ -1,10 +1,8 @@
 
 <?php
 include_once('Connexion.php');
-
 class LoginBDManager
 {
-
     function checkLogin($username)
     {
         $result = null;

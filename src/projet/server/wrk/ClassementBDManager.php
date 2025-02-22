@@ -16,7 +16,7 @@
 			$query = $connection->selectQuery(
 				"SELECT *
 				 FROM T_Equipe
-				 ORDER BY PTS DESC", 
+				 ORDER BY PTS DESC, G", 
 				array());
 			foreach($query as $data){
 				$classement = new Classement($data['PK_Equipe'], $data['nom'], $data['GP'], $data['G'], $data['PTS']);
