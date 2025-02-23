@@ -45,20 +45,17 @@ class matchCtrl {
   chargerEquipeSuccess(data, text, jqXHR) {
     $("#equipeDOM").empty();
     $("#equipeVIS").empty();
-    var compteur = 1;
 
     // Pour chaque equipe présent dans le XML
     $(data)
       .find("equipe")
       .each(function () {
-
         var nomEquipe = $(this).find("nom").text();
         console.log(nomEquipe);
-        var optionDOM = $('<option value="' + compteur +'"></option>').text(nomEquipe).val(nomEquipe);
-        var optionVIS = $('<option value="' + compteur +'"></option>').text(nomEquipe).val(nomEquipe);
+        var optionDOM = $('<option></option>').text(nomEquipe).val(nomEquipe);
+        var optionVIS = $('<option></option>').text(nomEquipe).val(nomEquipe);
         $("#equipeDOM").append(optionDOM);
         $("#equipeVIS").append(optionVIS);
-        compteur++;
       });
   }
 
