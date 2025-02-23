@@ -58,6 +58,17 @@ class servicesHttp {
       });
     }
 
+    deconnect(successCallback, errorCallback) {
+      $.ajax({
+        type: "POST",
+        dataType: "xml",
+        url: BASE_URL + "loginManager.php",
+        data: "action=disconnect",
+        success: successCallback,
+        error: errorCallback,
+      });
+    }
+
     modifierJoueur (nom, prenom, dateNaissance, description, fkPosition, fkEquipe, fkNationalite, pk_joueur,successCallback, errorCallback){
       $.ajax({
         type: "PUT",
@@ -70,7 +81,7 @@ class servicesHttp {
       });
     }
 
-    modifierEquipe (nom, abreviation, dateCreation, trophe, fkCanton, pk_equipe,successCallback, errorCallback){
+    modifierEquipe (nom, abreviation, dateCreation, trophe, fkCanton,successCallback, errorCallback){
       $.ajax({
         type: "PUT",
         dataType: "xml",

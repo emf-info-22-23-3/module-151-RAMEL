@@ -1,12 +1,17 @@
 class acceuilCtrl {
   constructor(){
     var butConnect = document.getElementById("connexion");
+    var butDeconnect = document.getElementById("deconnexion");
 
     http.chargerMatch(this.chargerMatchSuccess, this.chargerMatchError);
     http.chargerClassement(this.chargerClassementSuccess, this.chargerClassementError);
 
     butConnect.addEventListener("click", () => {
-      http.connect(document.getElementById("username").value, document.getElementById("pwd").value, this.connectSuccess, this.gestionErreurLogin);
+      http.connect(document.getElementById("username").value, document.getElementById("pwd").value, this.connectSuccess, this.gestionErreurConnect);
+    });
+
+    butDeconnect.addEventListener("click", () => {
+      http.deconnect(this.deconnectSuccess, this.gestionErreurDeconnect);
     });
 
     document.getElementById("deconnexion").style.display = "none";
@@ -16,14 +21,22 @@ class acceuilCtrl {
     if ($(data).find("result").text() != null) {
         alert("Login ok");
         sessionStorage.setItem("isConnected", "true");
-        indexCtrl.loadAuthentifie();
         document.getElementById("deconnexion").style.display = "visible";
         document.getElementById("connexion").style.display = "none";
     }
     else {
         alert("Erreur lors du login");
     }
-
+  }
+  
+  deconnectSuccess(data, text, jqXHR) {
+    if ($(data).find("result").text() != null) {
+      sessionStorage.removeItem("isConnected");
+      alert("Déconnexion réussie :)");
+      indexCtrl.loadNonAuthentifie();
+    } else {
+      alert("Erreur lors du login");
+    }
   }
 
   chargerMatchSuccess(data, text, jqXHR) {
@@ -108,8 +121,13 @@ class acceuilCtrl {
       alert("Erreur lors de la lecture des matchs: " + error);
   }
 
-  gestionErreurLogin(xhr, status, error) {
-    console.error("Erreur lors de votre login : ", status, error);
-    alert("une erreur est survenue lors de votre login");
-}
+  gestionErreurConnect(xhr, status, error) {
+    console.error("Erreur lors de votre connexion : ", status, error);
+    alert("une erreur est survenue lors de votre connexion");
+  }
+
+  gestionErreurDeconnect(xhr, status, error) {
+    console.error("Erreur lors de votre déconnexion : ", status, error);
+    alert("une erreur est survenue lors de votre déconnexion");
+  }
 }
