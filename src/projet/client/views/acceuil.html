@@ -1,59 +1,58 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>SwissHockey</title>
-</head>
-<body>
+  </head>
+  <body>
     <div class="header">
-        <div class="title">SwissHockey</div>
-        <div class="dropdown">
-            <button class="dropbtn">Menu ▼</button>
-            <div class="dropdown-content">
-                <a href="javascript:indexCtrl.loadAccueil();">Home</a>
-                <a href="javascript:indexCtrl.loadEquipe();">Equipe</a>
-                <a href="javascript:indexCtrl.loadJoueur();">Joueur</a>
-                <a href="javascript:indexCtrl.loadMatch();">Match</a>
-            </div>
+      <div class="title">SwissHockey</div>
+      <div class="dropdown">
+        <button class="dropbtn">Menu ▼</button>
+        <div class="dropdown-content">
+          <a href="javascript:indexCtrl.loadAccueil();">Home</a>
+          <a href="javascript:indexCtrl.loadEquipe();">Equipe</a>
+          <a href="javascript:indexCtrl.loadJoueur();">Joueur</a>
+          <a href="javascript:indexCtrl.loadMatch();">Match</a>
         </div>
+      </div>
     </div>
-    
+
     <div class="main-content">
-        <div class="left-section">
-            <div class="matches-acceuil">
-                <div class="match-title-acceuil">Match du jour:</div>
-                <div id="contener" class="matches"></div>
-            </div>
-            
-            <div class="login-section">
-                <div class="login-field">
-                    <label>nom d'utilisateur:</label>
-                    <input type="text" id="username">
-                </div>
-                <div class="login-field">
-                    <label>Mot de passe:</label>
-                    <input type="password" id="pwd">
-                </div>
-                <button id="connexion" class="connexion">Connexion</button>
-                <button id="deconnexion" class="deconnexion">Déconnexion</button>
-            </div>
+      <div class="left-section">
+        <div class="matches-acceuil">
+          <div class="match-title-acceuil">Match du jour:</div>
+          <div id="contener" class="matches"></div>
         </div>
-        
-        <div class="standings">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Classement</th>
-                        <th>GP</th>
-                        <th>G</th>
-                        <th>PTS</th>
-                        <th>P/GP</th>
-                    </tr>
-                </thead>
-                <tbody id="classement">
-                </tbody>
-            </table>
+
+        <div class="login-section">
+          <div class="login-field">
+            <label>nom d'utilisateur:</label>
+            <input type="text" id="username" />
+          </div>
+          <div class="login-field">
+            <label>Mot de passe:</label>
+            <input type="password" id="pwd" />
+          </div>
+          <button id="connexion" class="connexion">Connexion</button>
+          <button id="deconnexion" class="deconnexion">Déconnexion</button>
         </div>
+      </div>
+
+      <div class="standings">
+        <table>
+          <thead>
+            <tr>
+              <th>Classement</th>
+              <th>GP</th>
+              <th>G</th>
+              <th>PTS</th>
+              <th>P/GP</th>
+            </tr>
+          </thead>
+          <tbody id="classement"></tbody>
+        </table>
+      </div>
     </div>
-</body>
+  </body>
 </html>

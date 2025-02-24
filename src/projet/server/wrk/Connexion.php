@@ -21,7 +21,7 @@ class Connexion {
      */
     public static function getInstance() {
         if (is_null(self::$_instance)) {
-            self::$_instance = new connexion();
+            self::$_instance = new Connexion();
         }
         return self::$_instance;
     }

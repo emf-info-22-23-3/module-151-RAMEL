@@ -1,12 +1,14 @@
 <?php
-
-require_once("wrk/LoginBDManager.php");
+session_start();
 require_once("SessionManager.php");
+require_once("wrk/LoginBDManager.php");
+
+$sessionManager = new SessionManager();
 
 
 if (isset($_SERVER['REQUEST_METHOD'])) {
 
-    $sessionManager = new sessionManager();
+    
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['action'] == 'connect') {
         if (isset($_POST['login']) && isset($_POST['password'])) {
@@ -15,22 +17,22 @@ if (isset($_SERVER['REQUEST_METHOD'])) {
             $loginBD = new LoginBDManager();
 
             $result = $loginBD->checkLogin($username);
-            if ($result !== null) {
+            if ($result != null) {
                 if (password_verify($password, $result['password'])) {
+
                     $sessionManager->openSession($username);
-                    echo '<result>'.$sessionManager->currentUser().'</result>';
-                    //http_response_code(200);
+                    echo '<result>true</result>';
+                } else {
+                    echo '<result>Mot de passe incorrect </result>';
                 }
+            } else {
+                echo '<result>false</result>';
             }
-        } else {
-            echo '<result>false</result>';
-            //http_response_code(401);
         }
     }
 
-    if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['action'] == 'disconnect'){
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['action'] == 'deconnect') {
         $sessionManager->destroySession();
         echo '<result>true</result>';
     }
-
 }

@@ -1,14 +1,32 @@
-class equipeCtrl {
+class EquipeCtrl {
+  estConnecter = "false";
+
   constructor() {
     http.chargerEquipe(this.chargerEquipeSuccess, this.chargerEquipeError);
-    var modifier = document.getElementById("enregistrer");
 
-    modifier.addEventListener("click", () => {
+    this.estConnecter = this.checkLogin();
+    console.log(this.estConnecter);
+
+    var modifierEq = document.getElementById("enregistrer");
+    modifierEq.addEventListener("click", () => {
       http.modifierEquipe(
         this.afficheModificationSuccess.bind(this),
         this.afficheModificationErreur
       );
     });
+  }
+
+  checkLogin() {
+    var result = "false";
+    if (sessionStorage.getItem("isConnected") == "true") {
+      console.log("connecter");
+      document.getElementById("enregistrer").style.display = "block";
+      result = "true";
+    } else {
+      console.log("non-connecter");
+      document.getElementById("enregistrer").style.display = "none";
+    }
+    return result;
   }
 
   chargerEquipeSuccess(data, text, jqXHR) {
@@ -44,7 +62,14 @@ class equipeCtrl {
             "</div>" +
             "</div>"
         );
-        //card.find('input').attr('readonly', true);
+
+        if (this.estConnecter == "false") {
+          console.log(this.estConnecter);
+          card.find("input").attr("readonly", true);
+        } else {
+          console.log(this.estConnecter);
+          card.find("input").attr("readonly", false);
+        }
 
         // Remplir la carte avec les données de l'équipe
         card.find(".nom").val($(this).find("nom").text());
@@ -95,6 +120,12 @@ class equipeCtrl {
             $("#content").append(card);
         });
     }**/
+
+  afficheModificationSuccess() {}
+
+  afficheModificationErreur(request, status, error) {
+    alert("Erreur lors de la modification des Equipes: " + error);
+  }
 
   chargerEquipeError(request, status, error) {
     alert("Erreur lors de la lecture des Equipes: " + error);

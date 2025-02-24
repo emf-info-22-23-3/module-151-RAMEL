@@ -1,41 +1,61 @@
-class acceuilCtrl {
-  constructor(){
+class AcceuilCtrl {
+  constructor() {
     var butConnect = document.getElementById("connexion");
     var butDeconnect = document.getElementById("deconnexion");
 
+    this.checkLogin();
+
     http.chargerMatch(this.chargerMatchSuccess, this.chargerMatchError);
-    http.chargerClassement(this.chargerClassementSuccess, this.chargerClassementError);
+    http.chargerClassement(
+      this.chargerClassementSuccess,
+      this.chargerClassementError
+    );
 
     butConnect.addEventListener("click", () => {
-      http.connect(document.getElementById("username").value, document.getElementById("pwd").value, this.connectSuccess, this.gestionErreurConnect);
+      http.connect(
+        document.getElementById("username").value,
+        document.getElementById("pwd").value,
+        this.connectSuccess,
+        this.gestionErreurConnect
+      );
     });
 
     butDeconnect.addEventListener("click", () => {
       http.deconnect(this.deconnectSuccess, this.gestionErreurDeconnect);
     });
+  }
 
-    document.getElementById("deconnexion").style.display = "none";
+  checkLogin() {
+    if (sessionStorage.getItem("isConnected") === "true") {
+      console.log("connecter");
+      document.getElementById("deconnexion").style.display = "block";
+      document.getElementById("connexion").style.display = "none";
+    } else {
+      console.log("non-connecter");
+      document.getElementById("deconnexion").style.display = "none";
+      document.getElementById("connexion").style.display = "block";
+    }
   }
 
   connectSuccess(data, text, jqXHR) {
-    if ($(data).find("result").text() != null) {
-        alert("Login ok");
-        sessionStorage.setItem("isConnected", "true");
-        document.getElementById("deconnexion").style.display = "visible";
-        document.getElementById("connexion").style.display = "none";
-    }
-    else {
-        alert("Erreur lors du login");
+    if ($(data).find("result").text() == "true") {
+      alert("connexion réussi");
+      sessionStorage.setItem("isConnected", "true");
+      document.getElementById("deconnexion").style.display = "block";
+      document.getElementById("connexion").style.display = "none";
+    } else {
+      alert("Erreur durant la connexion");
     }
   }
-  
+
   deconnectSuccess(data, text, jqXHR) {
-    if ($(data).find("result").text() != null) {
+    if ($(data).find("result").text() == "true") {
       sessionStorage.removeItem("isConnected");
       alert("Déconnexion réussie :)");
-      indexCtrl.loadNonAuthentifie();
+      document.getElementById("deconnexion").style.display = "none";
+      document.getElementById("connexion").style.display = "block";
     } else {
-      alert("Erreur lors du login");
+      alert("Erreur durant la déconnexion");
     }
   }
 
@@ -45,20 +65,22 @@ class acceuilCtrl {
 
     var compteur = 0;
     // Pour chaque élément <match> dans la réponse
-    $(data).find("match").each(function () {
+    $(data)
+      .find("match")
+      .each(function () {
         var today = new Date();
         var formattedDate = today.toISOString().slice(0, 10);
-        if($(this).find("date").text() == formattedDate){
+        if ($(this).find("date").text() == formattedDate) {
           compteur++;
           // Créer une nouvelle ligne HTML pour le match
           var matchRow = $(
             '<div class="match-row-acceuil">' +
-                '<span class="equipeDOM"></span>' +
-                  '<span class="goalDom"></span>' +
-                '<span class="heure"></span>' +
-                '<span class="goalVisit"></span>' +
-                '<span class="equipeVIS"></span>' +
-            '</div>'
+              '<span class="equipeDOM"></span>' +
+              '<span class="goalDom"></span>' +
+              '<span class="heure"></span>' +
+              '<span class="goalVisit"></span>' +
+              '<span class="equipeVIS"></span>' +
+              "</div>"
           );
 
           // Remplir la ligne avec les données du match
@@ -70,9 +92,9 @@ class acceuilCtrl {
         }
         // Ajouter la ligne au conteneur principal
         $("#contener").append(matchRow);
-    });
+      });
 
-    if(compteur == 0){
+    if (compteur == 0) {
       var pasMatch = $(
         '<div class="no-match-row-acceuil">Pas de match ce jour</div>'
       );
@@ -80,45 +102,47 @@ class acceuilCtrl {
     }
   }
 
-  chargerClassementSuccess(data, text, jqXHR) {   
+  chargerClassementSuccess(data, text, jqXHR) {
     // Vider le conteneur pour éviter les doublons
     $("#classement").empty();
 
     // Pour chaque joueur présent dans le XML
-    $(data).find("classement").each(function () {
-      // Créer une carte en utilisant un template HTML
-      var tableau = $(
-        '<tr>' +
-          '<td class="equipe"></td>' +
-          '<td class="GP"></td>' +
-          '<td class="G"></td>' +
-          '<td class="PTS"></td>' +
-          '<td class="PGP"></td>' +
-        '</tr>'
-      );
+    $(data)
+      .find("classement")
+      .each(function () {
+        // Créer une carte en utilisant un template HTML
+        var tableau = $(
+          "<tr>" +
+            '<td class="equipe"></td>' +
+            '<td class="GP"></td>' +
+            '<td class="G"></td>' +
+            '<td class="PTS"></td>' +
+            '<td class="PGP"></td>' +
+            "</tr>"
+        );
 
-      // Remplir la carte avec les données du joueur
-      tableau.find(".equipe").text($(this).find("nom").text());
-      tableau.find(".GP").text($(this).find("GP").text());
-      tableau.find(".G").text($(this).find("G").text());
-      tableau.find(".PTS").text($(this).find("PTS").text());
-      let nombre = $(this).find("PTS").text()/$(this).find("GP").text();
-      let formate = nombre.toFixed(3);
-      tableau.find(".PGP").text(formate);
+        // Remplir la carte avec les données du joueur
+        tableau.find(".equipe").text($(this).find("nom").text());
+        tableau.find(".GP").text($(this).find("GP").text());
+        tableau.find(".G").text($(this).find("G").text());
+        tableau.find(".PTS").text($(this).find("PTS").text());
+        let nombre = $(this).find("PTS").text() / $(this).find("GP").text();
+        let formate = nombre.toFixed(3);
+        tableau.find(".PGP").text(formate);
 
-      // Ajouter la carte générée dans le conteneur
-      $("#classement").append(tableau);
-    });
+        // Ajouter la carte générée dans le conteneur
+        $("#classement").append(tableau);
+      });
   }
 
   chargerClassementError(request, status, error) {
     console.error(error);
-      alert("Erreur lors de la lecture du classement: " + error);
+    alert("Erreur lors de la lecture du classement: " + error);
   }
 
   chargerMatchError(request, status, error) {
     console.error(error);
-      alert("Erreur lors de la lecture des matchs: " + error);
+    alert("Erreur lors de la lecture des matchs: " + error);
   }
 
   gestionErreurConnect(xhr, status, error) {

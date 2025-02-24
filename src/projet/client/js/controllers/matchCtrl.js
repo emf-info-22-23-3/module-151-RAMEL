@@ -1,12 +1,25 @@
-class matchCtrl {
+class MatchCtrl {
   constructor() {
     http.chargerMatch(this.chargerMatchSuccess, this.chargerMatchError);
+
+    this.checkLogin();
+
     http.chargerEquipe(this.chargerEquipeSuccess, this.chargerEquipeError);
 
     // Définir la valeur de l'élément input de type date avec la date du jour
     var today = new Date();
     var formattedDate = today.toISOString().slice(0, 10);
     document.getElementById("dateInput").value = formattedDate;
+  }
+
+  checkLogin() {
+    if (sessionStorage.getItem("isConnected") === "true") {
+      console.log("connecter");
+      document.getElementById("ajouter").style.display = "block";
+    } else {
+      console.log("non-connecter");
+      document.getElementById("ajouter").style.display = "none";
+    }
   }
 
   chargerMatchSuccess(data, text, jqXHR) {
@@ -51,9 +64,8 @@ class matchCtrl {
       .find("equipe")
       .each(function () {
         var nomEquipe = $(this).find("nom").text();
-        console.log(nomEquipe);
-        var optionDOM = $('<option></option>').text(nomEquipe).val(nomEquipe);
-        var optionVIS = $('<option></option>').text(nomEquipe).val(nomEquipe);
+        var optionDOM = $("<option></option>").text(nomEquipe).val(nomEquipe);
+        var optionVIS = $("<option></option>").text(nomEquipe).val(nomEquipe);
         $("#equipeDOM").append(optionDOM);
         $("#equipeVIS").append(optionVIS);
       });

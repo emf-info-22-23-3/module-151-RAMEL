@@ -1,6 +1,8 @@
 <?php
-session_start();
-class sessionManager {
+class SessionManager {
+
+    public function __construct() {
+    }
     // Démarrer la session si elle n'est pas déjà démarrée
     public function openSession($user)
     {

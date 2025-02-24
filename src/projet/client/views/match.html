@@ -1,61 +1,57 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
     <div class="header">
-        <div class="title">SwissHockey</div>
-        <div class="dropdown">
-            <button class="dropbtn">Menu ▼</button>
-            <div class="dropdown-content">
-                <a href="javascript:indexCtrl.loadAccueil();">Home</a>
-                <a href="javascript:indexCtrl.loadEquipe();">Equipe</a>
-                <a href="javascript:indexCtrl.loadJoueur();">Joueur</a>
-                <a href="javascript:indexCtrl.loadMatch();">Match</a>
-            </div>
+      <div class="title">SwissHockey</div>
+      <div class="dropdown">
+        <button class="dropbtn">Menu ▼</button>
+        <div class="dropdown-content">
+          <a href="javascript:indexCtrl.loadAccueil();">Home</a>
+          <a href="javascript:indexCtrl.loadEquipe();">Equipe</a>
+          <a href="javascript:indexCtrl.loadJoueur();">Joueur</a>
+          <a href="javascript:indexCtrl.loadMatch();">Match</a>
         </div>
+      </div>
     </div>
 
     <h1 class="page-title">Match</h1>
 
     <div class="match-container">
-        <div class="match-header">
-            <span>équipe domicile</span>
-            <span>goal domicile</span>
-            <span>date</span>
-            <span>heure</span>
-            <span>goal visiteur</span>
-            <span>équipe visiteur</span>
-        </div>
-        <div id="contener" class="matches"></div>
+      <div class="match-header">
+        <span>équipe domicile</span>
+        <span>goal domicile</span>
+        <span>date</span>
+        <span>heure</span>
+        <span>goal visiteur</span>
+        <span>équipe visiteur</span>
+      </div>
+      <div id="contener" class="matches"></div>
 
-        <div class="add-match">
-            <h2>Ajouter un match:</h2>
-            <form class="add-match-form">
-                <div class="form-group">
-                    <label>Date</label>
-                    <input type="date" id="dateInput">
-                </div>
-                <div class="form-group">
-                    <label>Equipe local</label>
-                    <select>
-                        <option id="equipeDOM">Select</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Equipe visiteur</label>
-                    <select>
-                        <option id="equipeVIS">Select</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Heure</label>
-                    <input type="text" id="heure">
-                </div>
-                <button type="submit">Ajouter</button>
-            </form>
-        </div>
+      <div id="ajouter" class="add-match">
+        <h2>Ajouter un match:</h2>
+        <form class="add-match-form">
+          <div class="form-group">
+            <label>Date</label>
+            <input type="date" id="dateInput" />
+          </div>
+          <div class="form-group">
+            <label>Equipe local</label>
+            <select id="equipeDOM"></select>
+          </div>
+          <div class="form-group">
+            <label>Equipe visiteur</label>
+            <select id="equipeVIS"></select>
+          </div>
+          <div class="form-group">
+            <label>Heure</label>
+            <input type="text" id="heure" />
+          </div>
+          <button type="submit">Ajouter</button>
+        </form>
+      </div>
     </div>
-</body>
+  </body>
 </html>

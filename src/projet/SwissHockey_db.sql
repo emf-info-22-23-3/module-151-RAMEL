@@ -437,9 +437,9 @@ ENGINE = InnoDB;
 --
 
 INSERT INTO `T_Utilisateur` (`login`, `password`) VALUES
-('Admin', 'Pa$$w0rd'),
-('adm-RAM', 'Pa$$w0rd'),
-('adm-local', 'emf123');
+('Admin', '$2y$10$q1TqfSxmiIRwMDN21UoW5uLujh0.SaZb/M5WO39GCiO.kkxhefJXC'),
+('adm-RAM', '$2y$10$q1TqfSxmiIRwMDN21UoW5uLujh0.SaZb/M5WO39GCiO.kkxhefJXC'),
+('adm-local', '$2y$10$I1t0QDeDKRhdQzHDFBr2nOPsbifIhB1LRbx2NLhy7ERXG4A2Degx2');
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
