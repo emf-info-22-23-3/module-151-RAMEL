@@ -10,7 +10,7 @@ class EquipeCtrl {
     var modifierEq = document.getElementById("enregistrer");
     modifierEq.addEventListener("click", () => {
       $(".card").each(function () {
-        console.log(document.getElementById("postId").value);
+        console.log($("#postId").value);
         /**http.modifierEquipe(
           $(".postId").value,
           $(".trophe").value,

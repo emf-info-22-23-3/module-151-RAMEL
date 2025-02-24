@@ -15,7 +15,7 @@ include_once('Connexion.php');
 			$connection = Connexion::getInstance();
 			$query = $connection->selectQuery(
 				"SELECT T_Joueur.*, T_Equipe.nom AS equipe, T_Position.position AS position, T_Nationalite.nationalite AS nationalite
-				 FROM T_joueur
+				 FROM T_Joueur
 				 LEFT JOIN T_Equipe ON T_Joueur.fkEquipe = T_Equipe.PK_Equipe
 				 LEFT JOIN T_Position ON T_Joueur.fkPosition = T_Position.PK_Position
 				 LEFT JOIN T_Nationalite ON T_Joueur.fkNationalite = T_Nationalite.PK_Nationalite", 
