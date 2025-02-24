@@ -1,5 +1,5 @@
 <?php 
-	include_once('Connexion.php');
+include_once('Connexion.php');
         
 	class  JoueurBDManager
 	{
@@ -9,8 +9,7 @@
 		*
 		* @return liste de joueur
 		*/		
-		public function readJoueur()
-		{
+		public function readJoueur(){
 			$count = 0;
 			$liste = array();
 			$connection = Connexion::getInstance();
@@ -27,6 +26,20 @@
 			}	
 			return $liste;	
 		}
+
+		public function update($pk_joueur, $description) {
+        	$query = "UPDATE T_Joueur set description = :description where PK_Joueur = :pk_joueur";
+	        $params = array(
+    	        'pk_joueur' => $pk_joueur,
+        	    'description' => $description,
+        	);
+	        $res = connexion::getInstance()->executeQuery($query, $params);
+    	    if ($res > 0) {
+        	    return '<result>True</result>';
+        	} else {
+            	return '<result>False</result>';
+        	}
+    	}
 
 		/**
 		* Fonction permettant de retourner la liste des jouers en XML.

@@ -76,87 +76,41 @@ class ServicesHttp {
     });
   }
 
-  modifierJoueur(
-    nom,
-    prenom,
-    dateNaissance,
-    description,
-    fkPosition,
-    fkEquipe,
-    fkNationalite,
-    pk_joueur,
-    successCallback,
-    errorCallback
-  ) {
+  modifierJoueur(pk_joueur, description, successCallback, errorCallback) {
     $.ajax({
       type: "PUT",
       dataType: "xml",
       url: BASE_URL + "joueurManager.php",
       data:
-        "action=ajouter&nom=" +
-        nom +
-        "&prenom=" +
-        prenom +
-        "&dateNaissance=" +
-        dateNaissance +
+        "action=modifier&pk_joueur=" +
+        pk_joueur +
         "&description=" +
-        description +
-        "&fkPosition=" +
-        fkPosition +
-        "&fkEquipe=" +
-        fkEquipe +
-        "&fkNationalite=" +
-        fkNationalite +
-        "&pk_joueur" +
-        pk_joueur,
+        description,
       success: successCallback,
       error: errorCallback,
     });
   }
 
-  modifierEquipe(
-    nom,
-    abreviation,
-    dateCreation,
-    trophe,
-    fkCanton,
-    successCallback,
-    errorCallback
-  ) {
+  modifierEquipe(pk_equipe, trophe, successCallback, errorCallback) {
     $.ajax({
       type: "PUT",
       dataType: "xml",
-      url: BASE_URL + "joueurManager.php",
+      url: BASE_URL + "EquipeManager.php",
       data:
-        "action=ajouter&nom=" +
-        nom +
-        "&abreviation=" +
-        abreviation +
-        "&dateCreation=" +
-        dateCreation +
+        "action=modifier&pk_equipe=" +
+        pk_equipe +
         "&trophe=" +
-        trophe +
-        "&fkCanton=" +
-        fkCanton +
-        "&pk_equipe=" +
-        pk_equipe,
+        trophe,
       success: successCallback,
       error: errorCallback,
     });
   }
 
-  ajouterMatch(
-    date,
-    heure,
-    fkEquipeDom,
-    fkEquipeVIS,
-    successCallback,
-    errorCallback
-  ) {
+  ajouterMatch(date, heure, fkEquipeDom, fkEquipeVIS, successCallback, errorCallback) {
     $.ajax({
       type: "POST",
       dataType: "xml",
-      url: BASE_URL,
+      url: BASE_URL + "matchManager.php",
       data:
         "action=ajouter&date=" +
         date +

@@ -4,8 +4,6 @@ class JoueurCtrl {
 
     this.checkLogin();
 
-    http.modifierJoueur(this.chargerEquipeSuccess, this.chargerEquipeError);
-
     var modifier = document.getElementById("enregistrer");
     modifier.addEventListener("click", () => {
       http.modifierJoueur(
@@ -50,6 +48,9 @@ class JoueurCtrl {
             "</div>" +
             "</div>" +
             '<div class="form-group">' +
+            '<input type="hidden" class="postId"/>' +
+            "</div>" +
+            '<div class="form-group">' +
             '<strong>nom :<input type="text" class="nom" readonly></strong>' +
             "</div>" +
             '<div class="form-group">' +
@@ -74,6 +75,7 @@ class JoueurCtrl {
         );
 
         // Remplir la carte avec les données du joueur
+        card.find(".postId").val($(this).find("pk_joueur").text());
         card.find(".nom").val($(this).find("nom").text());
         card.find(".prenom").val($(this).find("prenom").text());
         card.find(".dateNaissance").val($(this).find("dateNaissance").text());
@@ -81,7 +83,8 @@ class JoueurCtrl {
         card.find(".position").val($(this).find("fkPosition").text());
         card.find(".equipe").val($(this).find("fkEquipe").text());
         card.find(".nationalite").val($(this).find("fkNationalite").text());
-        card.find(".photo").attr("src", $(this).find("photo").text());
+        //card.find(".photo").attr("src", $(this).find("photo").text());
+        console.log($(".postId").val());
 
         // Ajouter la carte générée dans le conteneur
         $("#content").append(card);

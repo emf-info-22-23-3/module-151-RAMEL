@@ -1,18 +1,23 @@
 class EquipeCtrl {
-  estConnecter = "false";
+  estConnect = "false";
 
   constructor() {
-    http.chargerEquipe(this.chargerEquipeSuccess, this.chargerEquipeError);
+    this.estConnect = this.checkLogin();
+    console.log(this.estConnect);
 
-    this.estConnecter = this.checkLogin();
-    console.log(this.estConnecter);
+    http.chargerEquipe(this.chargerEquipeSuccess, this.chargerEquipeError);
 
     var modifierEq = document.getElementById("enregistrer");
     modifierEq.addEventListener("click", () => {
-      http.modifierEquipe(
-        this.afficheModificationSuccess.bind(this),
-        this.afficheModificationErreur
-      );
+      $(".card").each(function () {
+        console.log(document.getElementById("postId").value);
+        /**http.modifierEquipe(
+          $(".postId").value,
+          $(".trophe").value,
+          this.afficheModificationSuccess.bind(this),
+          this.afficheModificationErreur
+        );**/ 
+      });
     });
   }
 
@@ -45,6 +50,7 @@ class EquipeCtrl {
             '<img alt="Image joueur" class="photo">' +
             "</div>" +
             "</div>" +
+            '<input type="hidden" id="postId"/>' +
             '<div class="form-group">' +
             '<strong>nom :<input type="text" class="nom"></strong>' +
             "</div>" +
@@ -55,7 +61,7 @@ class EquipeCtrl {
             '<strong>date création :<input type="text" class="dateCreation"></strong>' +
             "</div>" +
             '<div class="form-group">' +
-            '<strong>trophe :<input type="text" class="trophe"></strong>' +
+            '<strong>trophe :<input type="text" id="modif" class="trophe"></strong>' +
             "</div>" +
             '<div class="form-group">' +
             '<strong>canton :<input type="text" class="fkCanton"></strong>' +
@@ -63,15 +69,16 @@ class EquipeCtrl {
             "</div>"
         );
 
-        if (this.estConnecter == "false") {
-          console.log(this.estConnecter);
+        if (this.estConnect == "false") {
+          console.log(this.estConnect);
           card.find("input").attr("readonly", true);
         } else {
-          console.log(this.estConnecter);
-          card.find("input").attr("readonly", false);
+          card.find("input").attr("readonly", true);
+          card.find("#modif").attr("readonly", false);
         }
 
         // Remplir la carte avec les données de l'équipe
+        card.find(".postId").val($(this).find("pk_equipe").text());
         card.find(".nom").val($(this).find("nom").text());
         card.find(".abreviation").val($(this).find("abreviation").text());
         card.find(".dateCreation").val($(this).find("dateCreation").text());
@@ -121,7 +128,9 @@ class EquipeCtrl {
         });
     }**/
 
-  afficheModificationSuccess() {}
+  afficheModificationSuccess() {
+    
+  }
 
   afficheModificationErreur(request, status, error) {
     alert("Erreur lors de la modification des Equipes: " + error);

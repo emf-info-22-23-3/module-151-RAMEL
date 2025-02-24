@@ -25,6 +25,21 @@
 			}	
 			return $liste;	
 		}
+
+		public function update($pk_equipe, $trophe) {
+        	$query = "UPDATE T_Equipe set trophe = :trophe where PK_Equipe = :pk_equipe";
+	        $params = array(
+    	        'pk_equipe' => $pk_equipe,
+        	    'trophe' => $trophe,
+        	);
+	        $res = connexion::getInstance()->executeQuery($query, $params);
+    	    if ($res > 0) {
+        	    return '<result>True</result>';
+        	} else {
+            	return '<result>False</result>';
+        	}
+    	}
+
 		/**
 		* Fonction permettant de retourner la liste des equipes en XML.
 		*

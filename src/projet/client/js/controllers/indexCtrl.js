@@ -2,7 +2,7 @@ $().ready(function () {
   // service et indexCtrl sont des variables globales qui doivent être accessible depuis partout => pas de mot clé devant ou window.xxx
   http = new ServicesHttp();
   indexCtrl = new IndexCtrl(); // ctrl principal
-  http.centraliserErreurHttp(indexCtrl.afficherErreurHttp);
+  http.centraliserErreurHttp(IndexCtrl.afficherErreurHttp);
 });
 
 class IndexCtrl {
