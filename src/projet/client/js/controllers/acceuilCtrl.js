@@ -27,11 +27,9 @@ class AcceuilCtrl {
 
   checkLogin() {
     if (sessionStorage.getItem("isConnected") === "true") {
-      console.log("connecter");
       document.getElementById("deconnexion").style.display = "block";
       document.getElementById("connexion").style.display = "none";
     } else {
-      console.log("non-connecter");
       document.getElementById("deconnexion").style.display = "none";
       document.getElementById("connexion").style.display = "block";
     }

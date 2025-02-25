@@ -1,34 +1,32 @@
 class JoueurCtrl {
   constructor() {
-    http.chargerJoueur(this.chargerJoueurSuccess, this.chargerJoueurError);
-
     this.checkLogin();
 
-    var modifier = document.getElementById("enregistrer");
-    modifier.addEventListener("click", () => {
-      http.modifierJoueur(
-        document.getElementById("nom").value,
-        document.getElementById("prenom").value,
-        document.getElementById("dateNaissance").value,
-        document.getElementById("description").value,
-        document.getElementById("position").value,
-        document.getElementById("equipe").value,
-        document.getElementById("nationalite").value,
-        JSON.parse(cmbJoueurs.value).pk_joueur,
-        this.afficheModificationSuccess.bind(this),
-        this.afficheModificationErreur
-      );
+    http.chargerJoueur(this.chargerJoueurSuccess, this.chargerJoueurError);
+
+    var modifierJo = document.getElementById("enregistrer");
+    modifierJo.addEventListener("click", () => {
+      $(".card").each(function () {
+        console.log($(this).find('.postId').val());
+        /**http.modifierJoueur(
+          $(".postId").value,
+          $(".description").value,
+          this.afficheModificationSuccess.bind(this),
+          this.afficheModificationErreur
+        );**/ 
+      });
     });
   }
 
   checkLogin() {
-    if (sessionStorage.getItem("isConnected") === "true") {
-      console.log("connecter");
+    var result = "false";
+    if (sessionStorage.getItem("isConnected") == "true") {
       document.getElementById("enregistrer").style.display = "block";
+      result = "true";
     } else {
-      console.log("non-connecter");
       document.getElementById("enregistrer").style.display = "none";
     }
+    return result;
   }
 
   chargerJoueurSuccess(data, text, jqXHR) {
@@ -74,6 +72,13 @@ class JoueurCtrl {
             "</div>"
         );
 
+        if (sessionStorage.getItem("isConnected") == "true") {
+          card.find("input").attr("readonly", true);
+          card.find(".description").attr("readonly", false);
+        } else {
+          card.find("input").attr("readonly", true);
+        }
+
         // Remplir la carte avec les données du joueur
         card.find(".postId").val($(this).find("pk_joueur").text());
         card.find(".nom").val($(this).find("nom").text());
@@ -84,7 +89,6 @@ class JoueurCtrl {
         card.find(".equipe").val($(this).find("fkEquipe").text());
         card.find(".nationalite").val($(this).find("fkNationalite").text());
         //card.find(".photo").attr("src", $(this).find("photo").text());
-        console.log($(".postId").val());
 
         // Ajouter la carte générée dans le conteneur
         $("#content").append(card);

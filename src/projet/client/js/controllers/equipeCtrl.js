@@ -1,34 +1,24 @@
 class EquipeCtrl {
-  estConnect = "false";
-
   constructor() {
-    this.estConnect = this.checkLogin();
-    console.log(this.estConnect);
+
+    this.checkLogin();
 
     http.chargerEquipe(this.chargerEquipeSuccess, this.chargerEquipeError);
 
     var modifierEq = document.getElementById("enregistrer");
     modifierEq.addEventListener("click", () => {
       $(".card").each(function () {
-        console.log($("#postId").value);
-        /**http.modifierEquipe(
-          $(".postId").value,
-          $(".trophe").value,
-          this.afficheModificationSuccess.bind(this),
-          this.afficheModificationErreur
-        );**/ 
+          this.appelModifierEquipe($(this).find('.postId').val(), $(this).find('.trophe').val())
       });
     });
   }
 
   checkLogin() {
-    var result = "false";
+    var result = false;
     if (sessionStorage.getItem("isConnected") == "true") {
-      console.log("connecter");
       document.getElementById("enregistrer").style.display = "block";
-      result = "true";
+      result = true;
     } else {
-      console.log("non-connecter");
       document.getElementById("enregistrer").style.display = "none";
     }
     return result;
@@ -50,7 +40,7 @@ class EquipeCtrl {
             '<img alt="Image joueur" class="photo">' +
             "</div>" +
             "</div>" +
-            '<input type="hidden" id="postId"/>' +
+            '<input type="hidden" class="postId"/>' +
             '<div class="form-group">' +
             '<strong>nom :<input type="text" class="nom"></strong>' +
             "</div>" +
@@ -61,7 +51,7 @@ class EquipeCtrl {
             '<strong>date création :<input type="text" class="dateCreation"></strong>' +
             "</div>" +
             '<div class="form-group">' +
-            '<strong>trophe :<input type="text" id="modif" class="trophe"></strong>' +
+            '<strong>trophe :<input type="text" class="trophe"></strong>' +
             "</div>" +
             '<div class="form-group">' +
             '<strong>canton :<input type="text" class="fkCanton"></strong>' +
@@ -69,16 +59,15 @@ class EquipeCtrl {
             "</div>"
         );
 
-        /**if (this.estConnect == "false") {
-          console.log(this.estConnect);
+        if (sessionStorage.getItem("isConnected") == "true") {
           card.find("input").attr("readonly", true);
+          card.find(".trophe").attr("readonly", false);
         } else {
           card.find("input").attr("readonly", true);
-          card.find("#modif").attr("readonly", false);
-        }**/
+        }
 
         // Remplir la carte avec les données de l'équipe
-        card.find("#postId").val($(this).find("pk_equipe").text());
+        card.find(".postId").val($(this).find("pk_equipe").text());
         card.find(".nom").val($(this).find("nom").text());
         card.find(".abreviation").val($(this).find("abreviation").text());
         card.find(".dateCreation").val($(this).find("dateCreation").text());
@@ -91,8 +80,21 @@ class EquipeCtrl {
       });
   }
 
-  afficheModificationSuccess() {
-    
+  appelModifierEquipe(postId, trophe) {
+    http.modifierEquipe(
+      postId,
+      trophe,
+      this.afficheModificationSuccess,
+      this.afficheModificationErreur
+    );
+  }
+
+  afficheModificationSuccess(data, text, jqXHR) {
+    if ($(data).text() == "true") {
+      alert("Modification réussie");
+    } else {
+      alert("Aucune donnée modifié ou donnée invalide");
+    }
   }
 
   afficheModificationErreur(request, status, error) {
