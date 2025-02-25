@@ -26,7 +26,8 @@ class SessionManager
      */
     public function isConnected(): bool
     {
-        return  $_SESSION['user'];
+        print_r($_SESSION['user']);
+        return isset($_SESSION['user']);
     }
 
     /**
