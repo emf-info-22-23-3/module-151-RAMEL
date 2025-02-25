@@ -20,10 +20,10 @@ if (isset($_SERVER['REQUEST_METHOD'])) {
         // Récupère les données des équipes au format XML et les affiche
         echo $equipeBD->getInXML();
     }
+    $session = new SessionManager();
 
     // Gestion de la mise à jour des trophées de l'équipe (PUT)
     if ($_SERVER['REQUEST_METHOD'] == 'PUT') {
-        $session = new SessionManager();
 
         if ($session->isConnected()) {
             // Lit les données brutes de la requête et les analyse en tableau associatif

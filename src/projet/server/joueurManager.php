@@ -5,9 +5,9 @@ header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, X-Auth-Token, Origin, Authorization");  
 
 // Inclusion des fichiers nécessaires pour la gestion des joueurs
+include_once('SessionManager.php');
 include_once('wrk/JoueurBDManager.php');
 include_once('beans/Joueur.php');
-include_once('SessionManager.php');
 
 // Vérifie si la méthode de requête HTTP est définie
 if (isset($_SERVER['REQUEST_METHOD'])) {
