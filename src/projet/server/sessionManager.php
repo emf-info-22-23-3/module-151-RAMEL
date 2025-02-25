@@ -26,6 +26,7 @@ class SessionManager
      */
     public function isConnected(): bool
     {
+        print_r($_SESSION['user']);
         return isset($_SESSION['user']);
     }
 
@@ -40,26 +41,6 @@ class SessionManager
             session_unset();
             session_destroy();
         }
-    }
-
-    /**
-     * Retourne les informations de l'utilisateur actuellement connecté.
-     *
-     * @return mixed Retourne les informations de l'utilisateur ou `null` si aucun utilisateur n'est connecté.
-     */
-    public function currentUser()
-    {
-        return $_SESSION['user'] ?? null;
-    }
-
-    /**
-     * Retourne l'ID de la session en cours.
-     *
-     * @return string L'identifiant unique de la session.
-     */
-    public function getSessionId(): string
-    {
-        return session_id();
     }
 }
 ?>

@@ -31,7 +31,7 @@ if (isset($_SERVER['REQUEST_METHOD'])) {
 
             // Vérifie si les paramètres nécessaires sont présents
             if (isset($vars['pk_equipe']) && isset($vars['trophe'])) {
-            
+
                 $equipeBD = new EquipeBDManager();
             
                 // Met à jour les informations de l'équipe (après avoir nettoyé les données)
