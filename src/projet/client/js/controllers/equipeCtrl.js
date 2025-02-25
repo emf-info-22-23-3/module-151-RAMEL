@@ -6,9 +6,9 @@ class EquipeCtrl {
     http.chargerEquipe(this.chargerEquipeSuccess, this.chargerEquipeError);
 
     var modifierEq = document.getElementById("enregistrer");
-    modifierEq.addEventListener("click", () => {
-      $(".card").each(function () {
-          this.appelModifierEquipe($(this).find('.postId').val(), $(this).find('.trophe').val())
+    modifierEq.addEventListener("click", function () {
+        $(".card").each(function () {
+          http.modifierEquipe($(this).find('.postId').val(), $(this).find('.trophe').val(), this.afficheModificationSuccess, this.afficheModificationErreur);
       });
     });
   }
@@ -78,15 +78,6 @@ class EquipeCtrl {
         // Ajouter la carte générée dans le conteneur
         $("#content").append(card);
       });
-  }
-
-  appelModifierEquipe(postId, trophe) {
-    http.modifierEquipe(
-      postId,
-      trophe,
-      this.afficheModificationSuccess,
-      this.afficheModificationErreur
-    );
   }
 
   afficheModificationSuccess(data, text, jqXHR) {

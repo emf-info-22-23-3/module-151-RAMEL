@@ -5,15 +5,9 @@ class JoueurCtrl {
     http.chargerJoueur(this.chargerJoueurSuccess, this.chargerJoueurError);
 
     var modifierJo = document.getElementById("enregistrer");
-    modifierJo.addEventListener("click", () => {
-      $(".card").each(function () {
-        console.log($(this).find('.postId').val());
-        /**http.modifierJoueur(
-          $(".postId").value,
-          $(".description").value,
-          this.afficheModificationSuccess.bind(this),
-          this.afficheModificationErreur
-        );**/ 
+    modifierJo.addEventListener("click", function () {
+        $(".card").each(function () {
+          http.modifierJoueur($(this).find('.postId').val(), $(this).find('.description').val(), this.afficheModificationSuccess, this.afficheModificationErreur);
       });
     });
   }
@@ -93,6 +87,18 @@ class JoueurCtrl {
         // Ajouter la carte générée dans le conteneur
         $("#content").append(card);
       });
+  }
+
+  afficheModificationSuccess(data, text, jqXHR) {
+    if ($(data).text() == "true") {
+      alert("Modification réussie");
+    } else {
+      alert("Aucune donnée modifié ou donnée invalide");
+    }
+  }
+
+  afficheModificationErreur(request, status, error) {
+    alert("Erreur lors de la modification des Equipes: " + error);
   }
 
   chargerJoueurError(request, status, error) {
