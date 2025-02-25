@@ -27,6 +27,13 @@ include_once('Connexion.php');
 			return $liste;	
 		}
 
+		/**
+		 * Fonction permettant de mettre à jour la description d'un joueur.
+		 * 
+		 * @param $pk_joueur : Identifiant du joueur
+		 * @param $description : Description du joueur
+		 * @return String : Résultat de la mise à jour
+		 */
 		public function update($pk_joueur, $description) {
         	$query = "UPDATE T_Joueur set description = :description where PK_Joueur = :pk_joueur";
 	        $params = array(
