@@ -1,0 +1,8 @@
+Pour se connecter en admin il faut utiliser:
+username: Admin     password: Pa$$w0rd
+username: adm-RAM     password: Pa$$w0rd
+username: adm-local     password: emf123
+
+
+pour rejoindre le site il faut utilisé cet URL:
+https://ramela.emf-informatique.ch/151/projet/client/
