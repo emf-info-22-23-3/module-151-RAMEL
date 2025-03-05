@@ -1,4 +1,4 @@
-var BASE_URL = "http://localhost:8080/projet/server/";
+var BASE_URL = "../../projet/server/";
 
 class ServicesHttp {
   constructor() {}
