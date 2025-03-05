@@ -1,4 +1,4 @@
-var BASE_URL = "../../projet/server/";
+var BASE_URL = "../../../server/";
 
 class ServicesHttp {
   constructor() {}
