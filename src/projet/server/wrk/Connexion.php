@@ -31,13 +31,13 @@ class Connexion {
      */
     private function __construct() {
         try {
-            $this->pdo = new PDO('mysql:host=emf-informatique.ch;dbname=ramela_bd_SwissHockey', 'ramela_ramela', 'xMl*V@LXF!HM', array(
+            /**$this->pdo = new PDO('mysql:host=emf-informatique.ch;dbname=ramela_bd_SwissHockey', 'ramela_ramela', 'xMl*V@LXF!HM', array(
                 PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8',
-                PDO::ATTR_PERSISTENT => true));
+                PDO::ATTR_PERSISTENT => true));**/
 
-                /**$this->pdo = new PDO('mysql:host=mysql;dbname=bd_SwissHockey', 'root', 'root', array(
+                $this->pdo = new PDO('mysql:host=mysql;dbname=bd_SwissHockey', 'root', 'root', array(
                     PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8',
-                    PDO::ATTR_PERSISTENT => true));**/
+                    PDO::ATTR_PERSISTENT => true));
         } catch (PDOException $e) {
             print "Erreur !: " . $e->getMessage() . "<br/>";
             die();

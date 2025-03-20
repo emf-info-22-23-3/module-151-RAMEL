@@ -7,9 +7,9 @@ class EquipeCtrl {
 
     var modifierEq = document.getElementById("enregistrer");
     modifierEq.addEventListener("click", function () {
-        $(".card").each(function () {
-          http.modifierEquipe($(this).find('.postId').val(), $(this).find('.trophe').val(), this.afficheModificationSuccess, this.afficheModificationErreur);
-      });
+      $(".card").each(function () {
+        http.modifierEquipe($(this).find('.postId').val(), $(this).find('.trophe').val(), this.afficheModificationSuccess, this.afficheModificationErreur);
+    });
     });
   }
 

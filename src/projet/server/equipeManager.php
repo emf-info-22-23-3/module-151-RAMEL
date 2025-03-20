@@ -1,4 +1,7 @@
 <?php
+// Démarrage de la session
+session_start();
+
 // Configuration des en-têtes CORS pour autoriser les requêtes depuis n'importe quelle origine
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
