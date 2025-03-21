@@ -12,12 +12,12 @@ header("Access-Control-Allow-Headers: Content-Type, X-Auth-Token, Origin, Author
 	// Inclusion de la classe MatchDB (probablement une entité représentant un match)
 	include_once('beans/MatchDB.php');
 
+	include_once('SessionManager.php');
+
 	// Vérifie si la méthode de requête HTTP est définie
-	if (isset($_SERVER['REQUEST_METHOD']))
-	{
+	if (isset($_SERVER['REQUEST_METHOD'])) {
     	// Vérifie si la requête est de type GET
-	    if ($_SERVER['REQUEST_METHOD'] == 'GET')
-    	{
+	    if ($_SERVER['REQUEST_METHOD'] == 'GET'){
         	// Crée une instance du gestionnaire de base de données des matchs
         	$matchBD = new MatchBDManager();
         
@@ -32,12 +32,12 @@ header("Access-Control-Allow-Headers: Content-Type, X-Auth-Token, Origin, Author
 
 			//Vérifie que l'utilisateur est connecté
 			if ($session->isConnected()) {
-				$bdReader = new JoueurBDManager();
+				$matchBD = new MatchBDManager();
 				//vérifie si les variables existent et sont pas nulls
 				if (isset($_POST['date']) and isset($_POST['heure']) and isset($_POST['fkEquipeDom']) and isset($_POST['fkEquipeVIS'])) {
 					//Vérifie si l'ajout est réussie
-					if($bdReader->add(
-						htmlspecialchars($_POST['date'], ENT_QUOTES, 'utf-8'),
+					if($matchBD->ajoutMatch(
+						$_POST['date'],
 						htmlspecialchars($_POST['heure'], ENT_QUOTES, 'utf-8'),
 						htmlspecialchars($_POST['fkEquipeDom'], ENT_QUOTES, 'utf-8'),
 						htmlspecialchars($_POST['fkEquipeVIS'], ENT_QUOTES, 'utf-8'),

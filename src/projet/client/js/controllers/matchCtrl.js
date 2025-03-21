@@ -13,17 +13,36 @@ class MatchCtrl {
 
     var ajouterMatch = document.getElementById("enregistrer");
     ajouterMatch.addEventListener("click", function () {
-      if(document.getElementById("dateInput").value > formattedDate) {
-          http.ajouterMatch(
-            document.getElementById("heure").value,
-            document.getElementById("equipeDOM").value,
-            document.getElementById("equipeVIS").value,
-            this.afficheAjoutSuccess,
-            this.afficheAjoutErreur
-          );
+      if (document.getElementById("dateInput").value > formattedDate) {
+        http.ajouterMatch(
+          document.getElementById("dateInput").value,
+          document.getElementById("heure").value,
+          document.getElementById("equipeDOM").value,
+          document.getElementById("equipeVIS").value,
+          this.afficheAjoutSuccess,
+          this.afficheAjoutErreur
+        );
       } else {
         this.afficheAjoutErreur;
       }
+    });
+
+    var fkEquipeDomicil = document.getElementById("equipeDOM");
+    fkEquipeDomicil.addEventListener("click", function () {
+      http.getPKEquipe(
+        document.getElementById("equipeDOM").value,
+        this.afficheGetPKSuccess,
+        this.afficheGetPKErreur
+      );
+    });
+
+    var fkEquipeVisiteur = document.getElementById("equipeVIS");
+    fkEquipeVisiteur.addEventListener("click", function () {
+      http.getPKEquipe(
+        document.getElementById("equipeVIS").value,
+        this.afficheGetPKSuccess,
+        this.afficheGetPKErreur
+      );
     });
   }
 
@@ -86,6 +105,19 @@ class MatchCtrl {
       });
   }
 
+  afficheGetPKSuccess(data, text, jqXHR) {
+    $(data)
+      .find("equipe")
+      .each(function () {
+        var pk = $(this).find("pk_equipe").text();
+        if (document.getElementById("postIdEquipeDom").value == "") {
+          document.getElementById("postIdEquipeDom").value = pk;
+        } else {
+          document.getElementById("postIdEquipeVis").value = pk;
+        }
+      });
+  }
+
   afficheAjoutSuccess(data, text, jqXHR) {
     if ($(data).text() == "true") {
       alert("ajout réussie");
@@ -106,5 +138,10 @@ class MatchCtrl {
   chargerEquipeError(request, status, error) {
     console.error(error);
     alert("Erreur lors de la lecture des equipes: " + error);
+  }
+
+  afficheGetPKErreur(request, status, error) {
+    console.error(error);
+    alert("Erreur lors de récupération de la PK: " + error);
   }
 }

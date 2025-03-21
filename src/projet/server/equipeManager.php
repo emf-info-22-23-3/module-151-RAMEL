@@ -17,13 +17,19 @@ if (isset($_SERVER['REQUEST_METHOD'])) {
 
     // Gestion de la récupération des équipes (GET)
     if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-        // Crée une instance du gestionnaire de base de données des équipes
-        $equipeBD = new EquipeBDManager();
+        if($_GET['action'] == "getPK"){
+            if(isset($vars['nomEquipe'])){
+                $equipeBD = new EquipeBDManager();
+                echo $equipeBD->getPK(htmlspecialchars($vars['nomEquipe'], ENT_QUOTES, 'utf-8'));
+            }
+        } else if($_GET['action'] == "charger") {
+            // Crée une instance du gestionnaire de base de données des équipes
+            $equipeBD = new EquipeBDManager();
         
-        // Récupère les données des équipes au format XML et les affiche
-        echo $equipeBD->getInXML();
+            // Récupère les données des équipes au format XML et les affiche
+            echo $equipeBD->getInXML();
+        }
     }
-    $session = new SessionManager();
 
     // Gestion de la mise à jour des trophées de l'équipe (PUT)
     if ($_SERVER['REQUEST_METHOD'] == 'PUT') {

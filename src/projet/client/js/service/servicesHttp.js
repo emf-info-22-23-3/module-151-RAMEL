@@ -9,6 +9,7 @@ class ServicesHttp {
       type: "GET",
       dataType: "xml",
       url: BASE_URL + "equipeManager.php",
+      data: "action=charger",
       success: successCallback,
       error: errorCallback,
     });
@@ -102,6 +103,17 @@ class ServicesHttp {
         pk_equipe +
         "&trophe=" +
         trophe,
+      success: successCallback,
+      error: errorCallback,
+    });
+  }
+
+  getPKEquipe(nomEquipe, successCallback, errorCallback){
+    $.ajax({
+      type: "GET",
+      dataType: "xml",
+      url: BASE_URL + "equipeManager.php",
+      data: "action=getPK&nomEquipe=" + nomEquipe,
       success: successCallback,
       error: errorCallback,
     });

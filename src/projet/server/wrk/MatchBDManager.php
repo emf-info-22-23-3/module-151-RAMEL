@@ -17,20 +17,20 @@
 			LEFT JOIN T_Equipe AS equipeDOM ON T_Match.fkEquipeDOM = equipeDOM.PK_Equipe 
 			LEFT JOIN T_Equipe AS equipeVIS ON T_Match.fkEquipeVIS = equipeVIS.PK_Equipe", array());
 			foreach($query as $data){
-				$match = new MatchDB($data['PK_Match'], $data['date'], $data['heure'], $data['goalDom'], $data['goalVisit'], $data['equipeDOM'], $data['equipeVIS']);
+				$match = new MatchDB($data['PK_Match'], $data['date'], $data['heure'], $data['goalDom'], $data['goalVisit'], $data['equipeDOM'], $data['equipeVIS'], $data['fkEquipeDOM'], $data['fkEquipeVIS']);
 				$liste[$count++] = $match;
 			}	
 			return $liste;	
 		}
 
-		public function ajoutMatch($date, $heure, $fkEquipeDom, $fkEquipeVIS) {
+		public function ajoutMatch($date, $heure, $fkEquipeDOM, $fkEquipeVIS) {
 			$query = "INSERT INTO T_Match (date, heure, fkEquipeDOM, fkEquipeVIS) 
         	values(:date, :heure, :fkEquipeDOM, :fkEquipeVIS)";
         	$params = array(
-            	'date' => $date,
-            	'heure' => $heure,
-            	'fkEquipeDom' => $fkEquipeDom,
-            	'fkEquipeVIS' => $fkEquipeVIS,
+            	':date' => $date,
+            	':heure' => $heure,
+            	':fkEquipeDOM' => $fkEquipeDom,
+            	':fkEquipeVIS' => $fkEquipeVIS,
         	);
         	$res = connexion::getInstance()->ExecuteQuery($query, $params);
         	if ($res > 0) {

@@ -47,6 +47,19 @@
         	}
     	}
 
+		public function getPK($nom) {
+        	$query = "SELECT PK_Equipe FROM T_Equipe WHERE nom = :nom";
+	        $params = array(
+		        'nom' => $nom,
+			);
+	        $res = connexion::getInstance()->selectSingleQuery($query, $params);
+		    if ($res > 0) {
+			    return '<result>'.$res['PK_Equipe'].'</result>';
+			} else {
+				return '<result>False</result>';
+			}
+    	}
+
 		/**
 		* Fonction permettant de retourner la liste des equipes en XML.
 		*
