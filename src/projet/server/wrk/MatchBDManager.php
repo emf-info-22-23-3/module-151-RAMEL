@@ -22,6 +22,23 @@
 			}	
 			return $liste;	
 		}
+
+		public function ajoutMatch($date, $heure, $fkEquipeDom, $fkEquipeVIS) {
+			$query = "INSERT INTO T_Match (date, heure, fkEquipeDOM, fkEquipeVIS) 
+        	values(:date, :heure, :fkEquipeDOM, :fkEquipeVIS)";
+        	$params = array(
+            	'date' => $date,
+            	'heure' => $heure,
+            	'fkEquipeDom' => $fkEquipeDom,
+            	'fkEquipeVIS' => $fkEquipeVIS,
+        	);
+        	$res = connexion::getInstance()->ExecuteQuery($query, $params);
+        	if ($res > 0) {
+            	return true;
+        	} else {
+        	    return false;
+        	}
+		}
 		
 		/**
 		* Fonction permettant de retourner la liste des matchs en XML.

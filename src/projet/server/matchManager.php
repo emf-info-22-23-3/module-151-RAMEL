@@ -24,5 +24,38 @@ header("Access-Control-Allow-Headers: Content-Type, X-Auth-Token, Origin, Author
         	// Récupère les données des matchs au format XML et les affiche
         	echo $matchBD->getInXML();
     	}
+
+		//Gestion de l'ajout d'un joueur
+		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+			// Création d'une instance de SessionManager pour gérer les sessions utilisateur
+			$session = new SessionManager();
+
+			//Vérifie que l'utilisateur est connecté
+			if ($session->isConnected()) {
+				$bdReader = new JoueurBDManager();
+				//vérifie si les variables existent et sont pas nulls
+				if (isset($_POST['date']) and isset($_POST['heure']) and isset($_POST['fkEquipeDom']) and isset($_POST['fkEquipeVIS'])) {
+					//Vérifie si l'ajout est réussie
+					if($bdReader->add(
+						htmlspecialchars($_POST['date'], ENT_QUOTES, 'utf-8'),
+						htmlspecialchars($_POST['heure'], ENT_QUOTES, 'utf-8'),
+						htmlspecialchars($_POST['fkEquipeDom'], ENT_QUOTES, 'utf-8'),
+						htmlspecialchars($_POST['fkEquipeVIS'], ENT_QUOTES, 'utf-8'),
+					)){
+						http_response_code(200);
+						echo '<result>true</result>';
+					} else {
+						http_response_code(500);
+						echo '<result>false</result>';
+					}
+				} else {
+					http_response_code(400);
+					echo '<result>Champs invalide</result>';
+				}
+			} else {
+				http_response_code(401);
+				echo '<result>Pas connecté</result>';
+			}
+		}
 	}
 ?>

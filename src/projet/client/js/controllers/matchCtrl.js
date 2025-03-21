@@ -10,6 +10,21 @@ class MatchCtrl {
     var today = new Date();
     var formattedDate = today.toISOString().slice(0, 10);
     document.getElementById("dateInput").value = formattedDate;
+
+    var ajouterMatch = document.getElementById("enregistrer");
+    ajouterMatch.addEventListener("click", function () {
+      if(document.getElementById("dateInput").value > formattedDate) {
+          http.ajouterMatch(
+            document.getElementById("heure").value,
+            document.getElementById("equipeDOM").value,
+            document.getElementById("equipeVIS").value,
+            this.afficheAjoutSuccess,
+            this.afficheAjoutErreur
+          );
+      } else {
+        this.afficheAjoutErreur;
+      }
+    });
   }
 
   checkLogin() {
@@ -71,6 +86,18 @@ class MatchCtrl {
       });
   }
 
+  afficheAjoutSuccess(data, text, jqXHR) {
+    if ($(data).text() == "true") {
+      alert("ajout réussie");
+    } else {
+      alert("Aucun ajout réaliser ou donnée invalide");
+    }
+  }
+
+  afficheAjoutErreur(request, status, error) {
+    alert("Erreur lors de l'ajout du match: " + error);
+  }
+
   chargerMatchError(request, status, error) {
     console.error(error);
     alert("Erreur lors de la lecture des matchs: " + error);
@@ -78,6 +105,6 @@ class MatchCtrl {
 
   chargerEquipeError(request, status, error) {
     console.error(error);
-    alert("Erreur lors de la lecture des matchs: " + error);
+    alert("Erreur lors de la lecture des equipes: " + error);
   }
 }
