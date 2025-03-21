@@ -89,7 +89,7 @@ INSERT INTO `T_Equipe` (`nom`, `abreviation`, `dateCreation`, `photo`, `trophe`,
 -- Table T_Position
 CREATE TABLE IF NOT EXISTS `T_Position` (
   `PK_Position` INT NOT NULL AUTO_INCREMENT,
-  `position` VARCHAR(1) NOT NULL,
+  `position` VARCHAR(9) NOT NULL,
   PRIMARY KEY (`PK_Position`))
 ENGINE = InnoDB;
 
@@ -98,9 +98,9 @@ ENGINE = InnoDB;
 --
 
 INSERT INTO `T_Position` (`position`) VALUES
-('F'),
-('D'),
-('G');
+('Attaquant'),
+('Défenseur'),
+('Gardien');
 
 
 -- Table T_Nationalite

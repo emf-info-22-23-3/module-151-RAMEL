@@ -36,7 +36,7 @@
 		public function update($pk_equipe, $trophe) {
         	$query = "UPDATE T_Equipe set trophe = :trophe where PK_Equipe = :pk_equipe";
 	        $params = array(
-    	        'pk_joueur' => $pk_equipe,
+    	        'pk_equipe' => $pk_equipe,
         	    'trophe' => $trophe,
         	);
 	        $res = connexion::getInstance()->executeQuery($query, $params);

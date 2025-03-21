@@ -27,21 +27,26 @@ if (isset($_SERVER['REQUEST_METHOD'])) {
 
     // Gestion de la mise à jour des trophées de l'équipe (PUT)
     if ($_SERVER['REQUEST_METHOD'] == 'PUT') {
+        $session = new SessionManager();
 
         if ($session->isConnected()) {
-            // Lit les données brutes de la requête et les analyse en tableau associatif
+            // Lit les données brutes de la requête et les convertit en tableau associatif
             parse_str(file_get_contents("php://input"), $vars);
-
+        
             // Vérifie si les paramètres nécessaires sont présents
             if (isset($vars['pk_equipe']) && isset($vars['trophe'])) {
-
+    
+                // Crée une instance du gestionnaire de base de données des joueurs
                 $equipeBD = new EquipeBDManager();
-            
-                // Met à jour les informations de l'équipe (après avoir nettoyé les données)
+
+                // Met à jour le joueur avec les données fournies (après les avoir sécurisées)
                 echo $equipeBD->update(
                     htmlspecialchars($vars['pk_equipe'], ENT_QUOTES, 'utf-8'),
                     htmlspecialchars($vars['trophe'], ENT_QUOTES, 'utf-8')
                 );
+            } else {
+                http_response_code(400);
+                echo '<result>Paramètres manquants</result>';
             }
         } else {
 			http_response_code(401);

@@ -6,8 +6,13 @@ class JoueurCtrl {
 
     var modifierJo = document.getElementById("enregistrer");
     modifierJo.addEventListener("click", function () {
-        $(".card").each(function () {
-          http.modifierJoueur($(this).find('.postId').val(), $(this).find('.description').val(), this.afficheModificationSuccess, this.afficheModificationErreur);
+      $(".card").each(function () {
+        http.modifierJoueur(
+          $(this).find(".postId").val(),
+          $(this).find(".description").val(),
+          this.afficheModificationSuccess,
+          this.afficheModificationErreur
+        );
       });
     });
   }

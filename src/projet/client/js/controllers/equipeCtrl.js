@@ -1,6 +1,5 @@
 class EquipeCtrl {
   constructor() {
-
     this.checkLogin();
 
     http.chargerEquipe(this.chargerEquipeSuccess, this.chargerEquipeError);
@@ -8,16 +7,21 @@ class EquipeCtrl {
     var modifierEq = document.getElementById("enregistrer");
     modifierEq.addEventListener("click", function () {
       $(".card").each(function () {
-        http.modifierEquipe($(this).find('.postId').val(), $(this).find('.trophe').val(), this.afficheModificationSuccess, this.afficheModificationErreur);
-    });
+        http.modifierEquipe(
+          $(this).find(".postId").val(),
+          $(this).find(".trophe").val(),
+          this.afficheModificationSuccess,
+          this.afficheModificationErreur
+        );
+      });
     });
   }
 
   checkLogin() {
-    var result = false;
+    var result = "false";
     if (sessionStorage.getItem("isConnected") == "true") {
       document.getElementById("enregistrer").style.display = "block";
-      result = true;
+      result = "true";
     } else {
       document.getElementById("enregistrer").style.display = "none";
     }

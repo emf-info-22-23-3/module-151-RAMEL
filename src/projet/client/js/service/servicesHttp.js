@@ -96,7 +96,7 @@ class ServicesHttp {
     $.ajax({
       type: "PUT",
       dataType: "xml",
-      url: BASE_URL + "EquipeManager.php",
+      url: BASE_URL + "equipeManager.php",
       data:
         "action=modifier&pk_equipe=" +
         pk_equipe +
