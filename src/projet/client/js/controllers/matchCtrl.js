@@ -12,7 +12,8 @@ class MatchCtrl {
     document.getElementById("dateInput").value = formattedDate;
 
     var ajouterMatch = document.getElementById("enregistrer");
-    ajouterMatch.addEventListener("click", function () {
+
+    ajouterMatch.addEventListener("click", () => {
       if (document.getElementById("dateInput").value > formattedDate) {
         http.ajouterMatch(
           document.getElementById("dateInput").value,
@@ -89,8 +90,9 @@ class MatchCtrl {
   }
 
   afficheAjoutSuccess(data, text, jqXHR) {
-    if ($(data).text() == "true") {
+    if ($(data).find("result").text() == "true") {
       alert("ajout réussie");
+      http.chargerMatch(this.chargerMatchSuccess, this.chargerMatchError);
     } else {
       alert("Aucun ajout réaliser ou donnée invalide");
     }
