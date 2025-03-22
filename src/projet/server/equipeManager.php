@@ -18,9 +18,13 @@ if (isset($_SERVER['REQUEST_METHOD'])) {
     // Gestion de la récupération des équipes (GET)
     if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         if($_GET['action'] == "getPK"){
-            if(isset($vars['nomEquipe'])){
+
+            if(isset($_GET['nom'])){
                 $equipeBD = new EquipeBDManager();
-                echo $equipeBD->getPK(htmlspecialchars($vars['nomEquipe'], ENT_QUOTES, 'utf-8'));
+                echo $equipeBD->getPK(htmlspecialchars($_GET['nom'], ENT_QUOTES, 'utf-8'));
+            } else {
+                http_response_code(400);
+                echo '<result>Paramètres manquants !!!!!!!!</result>';
             }
         } else if($_GET['action'] == "charger") {
             // Crée une instance du gestionnaire de base de données des équipes
@@ -28,6 +32,9 @@ if (isset($_SERVER['REQUEST_METHOD'])) {
         
             // Récupère les données des équipes au format XML et les affiche
             echo $equipeBD->getInXML();
+        } else {
+            http_response_code(400);
+            echo '<result>Paramètres manquants</result>';
         }
     }
 

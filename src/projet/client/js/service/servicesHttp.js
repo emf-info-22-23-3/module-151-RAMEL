@@ -108,12 +108,12 @@ class ServicesHttp {
     });
   }
 
-  getPKEquipe(nomEquipe, successCallback, errorCallback){
+  getPKEquipe(nom, successCallback, errorCallback){
     $.ajax({
       type: "GET",
       dataType: "xml",
       url: BASE_URL + "equipeManager.php",
-      data: "action=getPK&nomEquipe=" + nomEquipe,
+      data: "action=getPK&nom=" + nom,
       success: successCallback,
       error: errorCallback,
     });

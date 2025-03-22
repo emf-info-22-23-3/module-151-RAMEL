@@ -31,7 +31,7 @@ class MatchCtrl {
     fkEquipeDomicil.addEventListener("click", function () {
       http.getPKEquipe(
         document.getElementById("equipeDOM").value,
-        this.afficheGetPKSuccess,
+        this.afficheGetPKDOMSuccess,
         this.afficheGetPKErreur
       );
     });
@@ -40,7 +40,7 @@ class MatchCtrl {
     fkEquipeVisiteur.addEventListener("click", function () {
       http.getPKEquipe(
         document.getElementById("equipeVIS").value,
-        this.afficheGetPKSuccess,
+        this.afficheGetPKVISSuccess,
         this.afficheGetPKErreur
       );
     });
@@ -105,17 +105,14 @@ class MatchCtrl {
       });
   }
 
-  afficheGetPKSuccess(data, text, jqXHR) {
-    $(data)
-      .find("equipe")
-      .each(function () {
-        var pk = $(this).find("pk_equipe").text();
-        if (document.getElementById("postIdEquipeDom").value == "") {
-          document.getElementById("postIdEquipeDom").value = pk;
-        } else {
-          document.getElementById("postIdEquipeVis").value = pk;
-        }
-      });
+  afficheGetPKDOMSuccess(data, text, jqXHR) {
+    console.log("test");
+    document.getElementById("postIdEquipeDom").value = $(data).find("pk_equipe").val();
+  }
+
+  afficheGetPKVISSuccess(data, text, jqXHR) {
+    console.log("test");
+    document.getElementById("postIdEquipeVis").value = $(data).find("pk_equipe").val();
   }
 
   afficheAjoutSuccess(data, text, jqXHR) {

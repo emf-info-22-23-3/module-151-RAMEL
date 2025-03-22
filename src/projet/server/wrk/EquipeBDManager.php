@@ -54,7 +54,7 @@
 			);
 	        $res = connexion::getInstance()->selectSingleQuery($query, $params);
 		    if ($res > 0) {
-			    return '<result>'.$res['PK_Equipe'].'</result>';
+      			return '<pk_equipe>'.$res['PK_Equipe'].'</pk_equipe>';
 			} else {
 				return '<result>False</result>';
 			}
