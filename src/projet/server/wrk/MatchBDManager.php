@@ -29,7 +29,7 @@
         	$params = array(
             	':date' => $date,
             	':heure' => $heure,
-            	':fkEquipeDOM' => $fkEquipeDom,
+            	':fkEquipeDOM' => $fkEquipeDOM,
             	':fkEquipeVIS' => $fkEquipeVIS,
         	);
         	$res = connexion::getInstance()->ExecuteQuery($query, $params);

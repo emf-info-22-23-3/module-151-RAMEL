@@ -26,24 +26,6 @@ class MatchCtrl {
         this.afficheAjoutErreur;
       }
     });
-
-    var fkEquipeDomicil = document.getElementById("equipeDOM");
-    fkEquipeDomicil.addEventListener("click", function () {
-      http.getPKEquipe(
-        document.getElementById("equipeDOM").value,
-        this.afficheGetPKDOMSuccess,
-        this.afficheGetPKErreur
-      );
-    });
-
-    var fkEquipeVisiteur = document.getElementById("equipeVIS");
-    fkEquipeVisiteur.addEventListener("click", function () {
-      http.getPKEquipe(
-        document.getElementById("equipeVIS").value,
-        this.afficheGetPKVISSuccess,
-        this.afficheGetPKErreur
-      );
-    });
   }
 
   checkLogin() {
@@ -98,21 +80,12 @@ class MatchCtrl {
       .find("equipe")
       .each(function () {
         var nomEquipe = $(this).find("nom").text();
-        var optionDOM = $("<option></option>").text(nomEquipe).val(nomEquipe);
-        var optionVIS = $("<option></option>").text(nomEquipe).val(nomEquipe);
+        var pkEquipe = $(this).find("pk_equipe").text();
+        var optionDOM = $("<option></option>").text(nomEquipe).val(pkEquipe);
+        var optionVIS = $("<option></option>").text(nomEquipe).val(pkEquipe);
         $("#equipeDOM").append(optionDOM);
         $("#equipeVIS").append(optionVIS);
       });
-  }
-
-  afficheGetPKDOMSuccess(data, text, jqXHR) {
-    console.log("test");
-    document.getElementById("postIdEquipeDom").value = $(data).find("pk_equipe").val();
-  }
-
-  afficheGetPKVISSuccess(data, text, jqXHR) {
-    console.log("test");
-    document.getElementById("postIdEquipeVis").value = $(data).find("pk_equipe").val();
   }
 
   afficheAjoutSuccess(data, text, jqXHR) {
@@ -135,10 +108,5 @@ class MatchCtrl {
   chargerEquipeError(request, status, error) {
     console.error(error);
     alert("Erreur lors de la lecture des equipes: " + error);
-  }
-
-  afficheGetPKErreur(request, status, error) {
-    console.error(error);
-    alert("Erreur lors de récupération de la PK: " + error);
   }
 }

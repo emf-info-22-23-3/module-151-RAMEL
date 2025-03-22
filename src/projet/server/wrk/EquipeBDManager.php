@@ -56,7 +56,7 @@
 		    if ($res > 0) {
       			return '<pk_equipe>'.$res['PK_Equipe'].'</pk_equipe>';
 			} else {
-				return '<result>False</result>';
+				return '<pk_equipe>False</pk_equipe>';
 			}
     	}
 
