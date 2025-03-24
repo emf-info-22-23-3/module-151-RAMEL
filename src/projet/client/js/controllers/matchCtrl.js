@@ -20,7 +20,7 @@ class MatchCtrl {
           document.getElementById("heure").value,
           document.getElementById("equipeDOM").value,
           document.getElementById("equipeVIS").value,
-          this.afficheAjoutSuccess,
+          this.chargerMatchSuccess,
           this.afficheAjoutErreur
         );
       } else {
@@ -87,15 +87,6 @@ class MatchCtrl {
         $("#equipeDOM").append(optionDOM);
         $("#equipeVIS").append(optionVIS);
       });
-  }
-
-  afficheAjoutSuccess(data, text, jqXHR) {
-    if ($(data).find("result").text() == "true") {
-      alert("ajout réussie");
-      http.chargerMatch(this.chargerMatchSuccess, this.chargerMatchError);
-    } else {
-      alert("Aucun ajout réaliser ou donnée invalide");
-    }
   }
 
   afficheAjoutErreur(request, status, error) {

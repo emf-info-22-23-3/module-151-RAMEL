@@ -42,7 +42,7 @@ if (isset($_SERVER['REQUEST_METHOD'])) {
 					$_POST['fkEquipeVIS'],
 				)){
 					http_response_code(200);
-					echo '<result>true</result>';
+					echo $matchBD->getInXML();
 				} else {
 					http_response_code(500);
 					echo '<result>false</result>';
