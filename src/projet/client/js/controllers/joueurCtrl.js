@@ -87,7 +87,7 @@ class JoueurCtrl {
         card.find(".position").val($(this).find("fkPosition").text());
         card.find(".equipe").val($(this).find("fkEquipe").text());
         card.find(".nationalite").val($(this).find("fkNationalite").text());
-        //card.find(".photo").attr("src", $(this).find("photo").text());
+        card.find(".photo").attr("src", $(this).find("photo").text());
 
         // Ajouter la carte générée dans le conteneur
         $("#content").append(card);
