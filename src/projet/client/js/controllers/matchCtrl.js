@@ -14,7 +14,7 @@ class MatchCtrl {
     var ajouterMatch = document.getElementById("enregistrer");
 
     ajouterMatch.addEventListener("click", () => {
-      if (document.getElementById("dateInput").value > formattedDate) {
+      if (document.getElementById("dateInput").value > formattedDate && document.getElementById("equipeDOM").value !== document.getElementById("equipeVIS").value && document.getElementById("heure").value !== "") {
         http.ajouterMatch(
           document.getElementById("dateInput").value,
           document.getElementById("heure").value,
@@ -24,7 +24,7 @@ class MatchCtrl {
           this.afficheAjoutErreur
         );
       } else {
-        this.afficheAjoutErreur;
+        alert("Veuillez choisir une date valide et/ou des équipes différentes et une date.");
       }
     });
   }

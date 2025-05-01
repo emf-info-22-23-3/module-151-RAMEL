@@ -15,7 +15,7 @@
 			$connection = Connexion::getInstance();
 			$query = $connection->selectQuery("SELECT T_Match.*, equipeDOM.nom AS equipeDOM, equipeVIS.nom AS equipeVIS FROM T_Match 
 			LEFT JOIN T_Equipe AS equipeDOM ON T_Match.fkEquipeDOM = equipeDOM.PK_Equipe 
-			LEFT JOIN T_Equipe AS equipeVIS ON T_Match.fkEquipeVIS = equipeVIS.PK_Equipe", array());
+			LEFT JOIN T_Equipe AS equipeVIS ON T_Match.fkEquipeVIS = equipeVIS.PK_Equipe ORDER BY date", array());
 			foreach($query as $data){
 				$match = new MatchDB($data['PK_Match'], $data['date'], $data['heure'], $data['goalDom'], $data['goalVisit'], $data['equipeDOM'], $data['equipeVIS'], $data['fkEquipeDOM'], $data['fkEquipeVIS']);
 				$liste[$count++] = $match;
