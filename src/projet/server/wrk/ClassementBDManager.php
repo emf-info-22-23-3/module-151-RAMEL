@@ -24,6 +24,7 @@
 			}	
 			return $liste;	
 		}
+		
 		/**
 		* Fonction permettant de retourner la liste des equipes en XML.
 		*

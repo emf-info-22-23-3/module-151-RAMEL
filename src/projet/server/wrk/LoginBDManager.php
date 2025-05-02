@@ -3,8 +3,13 @@
 include_once('Connexion.php');
 class LoginBDManager
 {
-    function checkLogin($username)
-    {
+    /**
+     * Fonction permettant de vérifier si le login et le mot de passe sont corrects.
+     * 
+     * @param String $username. Login de l'utilisateur
+     * @return String. Mot de passe de l'utilisateur
+     */
+    function checkLogin($username) {
         $result = null;
         $requete = "SELECT password from T_Utilisateur where login = :username";
         $params = array('username' => $username);

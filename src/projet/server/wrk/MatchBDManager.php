@@ -23,6 +23,15 @@
 			return $liste;	
 		}
 
+		/**
+		 * Fonction permettant l'ajout d'un match.
+		 * 
+		 * @param $date : date du match
+		 * @param $heure : heure du match
+		 * @param $fkEquipeDOM : PK de l'équipe domicile
+		 * @param $fkEquipeVIS : PK de l'équipe visiteur
+		 * @return String : Résultat de la mise à jour
+		 */
 		public function ajoutMatch($date, $heure, $fkEquipeDOM, $fkEquipeVIS) {
 			$query = "INSERT INTO T_Match (date, heure, fkEquipeDOM, fkEquipeVIS) 
         	values(:date, :heure, :fkEquipeDOM, :fkEquipeVIS)";

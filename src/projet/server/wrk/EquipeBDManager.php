@@ -47,6 +47,12 @@
         	}
     	}
 
+		/**
+		 * Fonction permettant de retourner le PK d'une equipe.
+		 * 
+		 * @param $nom : nom de l'équipe
+		 * @return String : PK de l'équipe
+		 */
 		public function getPK($nom) {
         	$query = "SELECT PK_Equipe FROM T_Equipe WHERE nom = :nom";
 	        $params = array(
