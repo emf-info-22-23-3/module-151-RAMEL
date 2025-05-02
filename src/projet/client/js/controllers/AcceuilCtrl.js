@@ -1,16 +1,29 @@
+/**
+ * Classe AcceuilCtrl
+ * Cette classe gère les interactions sur la page d'accueil, y compris la connexion, 
+ * la déconnexion, le chargement des matchs du jour et le classement.
+ */
 class AcceuilCtrl {
+  /**
+   * Constructeur de la classe AcceuilCtrl.
+   * Initialise les événements pour les boutons de connexion et de déconnexion,
+   * vérifie si l'utilisateur est connecté et charge les données des matchs et du classement.
+   */
   constructor() {
     var butConnect = document.getElementById("connexion");
     var butDeconnect = document.getElementById("deconnexion");
 
+    // Vérifier si l'utilisateur est connecté
     this.checkLogin();
 
+    // Charger les données des matchs et du classement
     http.chargerMatch(this.chargerMatchSuccess, this.chargerMatchError);
     http.chargerClassement(
       this.chargerClassementSuccess,
       this.chargerClassementError
     );
 
+    // Ajouter un événement pour le bouton "Connexion"
     butConnect.addEventListener("click", () => {
       http.connect(
         document.getElementById("username").value,
@@ -20,11 +33,16 @@ class AcceuilCtrl {
       );
     });
 
+    // Ajouter un événement pour le bouton "Déconnexion"
     butDeconnect.addEventListener("click", () => {
       http.deconnect(this.deconnectSuccess, this.gestionErreurDeconnect);
     });
   }
 
+  /**
+   * Vérifie si l'utilisateur est connecté.
+   * Affiche ou masque les boutons "Connexion" et "Déconnexion" en fonction de l'état de connexion.
+   */
   checkLogin() {
     if (sessionStorage.getItem("isConnected") === "true") {
       document.getElementById("deconnexion").style.display = "block";
@@ -35,9 +53,16 @@ class AcceuilCtrl {
     }
   }
 
+  /**
+   * Gère le succès de la connexion.
+   * Met à jour l'état de connexion et affiche un message de confirmation.
+   * @param {XMLDocument} data - Données XML de la réponse.
+   * @param {string} text - Texte de la réponse.
+   * @param {jqXHR} jqXHR - Objet de la requête AJAX.
+   */
   connectSuccess(data, text, jqXHR) {
     if ($(data).find("result").text() == "true") {
-      alert("connexion réussi");
+      alert("Connexion réussie");
       sessionStorage.setItem("isConnected", "true");
       document.getElementById("deconnexion").style.display = "block";
       document.getElementById("connexion").style.display = "none";
@@ -46,6 +71,13 @@ class AcceuilCtrl {
     }
   }
 
+  /**
+   * Gère le succès de la déconnexion.
+   * Met à jour l'état de connexion et affiche un message de confirmation.
+   * @param {XMLDocument} data - Données XML de la réponse.
+   * @param {string} text - Texte de la réponse.
+   * @param {jqXHR} jqXHR - Objet de la requête AJAX.
+   */
   deconnectSuccess(data, text, jqXHR) {
     if ($(data).find("result").text() == "true") {
       sessionStorage.removeItem("isConnected");
@@ -57,6 +89,13 @@ class AcceuilCtrl {
     }
   }
 
+  /**
+   * Gère le succès du chargement des matchs.
+   * Affiche les matchs du jour dans le conteneur principal.
+   * @param {XMLDocument} data - Données XML des matchs.
+   * @param {string} text - Texte de la réponse.
+   * @param {jqXHR} jqXHR - Objet de la requête AJAX.
+   */
   chargerMatchSuccess(data, text, jqXHR) {
     // Vider le conteneur pour éviter d'accumuler d'anciennes données
     $("#contener").empty();
@@ -100,6 +139,13 @@ class AcceuilCtrl {
     }
   }
 
+  /**
+   * Gère le succès du chargement du classement.
+   * Affiche les données du classement dans un tableau.
+   * @param {XMLDocument} data - Données XML du classement.
+   * @param {string} text - Texte de la réponse.
+   * @param {jqXHR} jqXHR - Objet de la requête AJAX.
+   */
   chargerClassementSuccess(data, text, jqXHR) {
     // Vider le conteneur pour éviter les doublons
     $("#classement").empty();
@@ -133,23 +179,51 @@ class AcceuilCtrl {
       });
   }
 
+  /**
+   * Gère les erreurs lors du chargement du classement.
+   * Affiche un message d'erreur.
+   * @param {jqXHR} request - Objet de la requête AJAX.
+   * @param {string} status - Statut de la requête.
+   * @param {string} error - Message d'erreur.
+   */
   chargerClassementError(request, status, error) {
     console.error(error);
     alert("Erreur lors de la lecture du classement: " + error);
   }
 
+  /**
+   * Gère les erreurs lors du chargement des matchs.
+   * Affiche un message d'erreur.
+   * @param {jqXHR} request - Objet de la requête AJAX.
+   * @param {string} status - Statut de la requête.
+   * @param {string} error - Message d'erreur.
+   */
   chargerMatchError(request, status, error) {
     console.error(error);
     alert("Erreur lors de la lecture des matchs: " + error);
   }
 
+  /**
+   * Gère les erreurs lors de la connexion.
+   * Affiche un message d'erreur.
+   * @param {jqXHR} xhr - Objet de la requête AJAX.
+   * @param {string} status - Statut de la requête.
+   * @param {string} error - Message d'erreur.
+   */
   gestionErreurConnect(xhr, status, error) {
     console.error("Erreur lors de votre connexion : ", status, error);
-    alert("une erreur est survenue lors de votre connexion");
+    alert("Une erreur est survenue lors de votre connexion");
   }
 
+  /**
+   * Gère les erreurs lors de la déconnexion.
+   * Affiche un message d'erreur.
+   * @param {jqXHR} xhr - Objet de la requête AJAX.
+   * @param {string} status - Statut de la requête.
+   * @param {string} error - Message d'erreur.
+   */
   gestionErreurDeconnect(xhr, status, error) {
     console.error("Erreur lors de votre déconnexion : ", status, error);
-    alert("une erreur est survenue lors de votre déconnexion");
+    alert("Une erreur est survenue lors de votre déconnexion");
   }
 }
