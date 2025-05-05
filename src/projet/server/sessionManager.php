@@ -1,45 +1,40 @@
-
 <?php
 /**
- * Classe SessionManager
- *
- * Cette classe gère la session utilisateur, y compris l'ouverture, la vérification,
- * la récupération des informations et la destruction de la session.
+ * Class SessionManager
+ * Gère les sessions utilisateur, y compris l'ouverture, la fermeture et la vérification de connexion.
  */
 class SessionManager
 {
     /**
-     * Ouvre une session et stocke les informations de l'utilisateur.
+     * Démarre une session et stocke le nom de l'utilisateur.
      *
-     * @param mixed $user Données de l'utilisateur à stocker dans la session.
+     * @param array $user le nom de l'utilisateur
      * @return void
      */
-    public function openSession($user): void
+    public function openSession($user)
     {
+        // Stocke le nom de l'utilisateur dans la session
         $_SESSION['user'] = $user;
+    }
+
+    /**
+     * Détruit la session en cours et supprime toutes les variables de session.
+     *
+     * @return void
+     */
+    public function destroySession()
+    {
+        session_unset();  // Supprime toutes les variables de session
+        session_destroy(); // Détruit la session
     }
 
     /**
      * Vérifie si un utilisateur est connecté.
      *
-     * @return bool Retourne `true` si un utilisateur est connecté, sinon `false`.
+     * @return bool Retourne `true` si l'utilisateur est connecté, sinon `false`.
      */
-    public function isConnected(): bool
+    public function isConnected()
     {
         return isset($_SESSION['user']);
     }
-
-    /**
-     * Détruit la session en cours.
-     *
-     * @return void
-     */
-    public function destroySession(): void
-    {
-        if (session_status() === PHP_SESSION_ACTIVE) {
-            session_unset();
-            session_destroy();
-        }
-    }
 }
-?>

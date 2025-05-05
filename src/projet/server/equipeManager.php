@@ -53,10 +53,15 @@ if (isset($_SERVER['REQUEST_METHOD'])) {
                 $equipeBD = new EquipeBDManager();
 
                 // Met à jour le joueur avec les données fournies (après les avoir sécurisées)
-                echo $equipeBD->update(
+                if($equipeBD->update(
                     htmlspecialchars($vars['pk_equipe'], ENT_QUOTES, 'utf-8'),
                     htmlspecialchars($vars['trophe'], ENT_QUOTES, 'utf-8')
-                );
+                )){
+                    http_response_code(200);
+				} else {
+					http_response_code(500);
+					echo '<result>false</result>';
+				}
             } else {
                 http_response_code(400);
                 echo '<result>Paramètres manquants</result>';

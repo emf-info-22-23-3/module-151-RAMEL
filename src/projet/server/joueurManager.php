@@ -39,14 +39,17 @@ if (isset($_SERVER['REQUEST_METHOD'])) {
                 $joueurBD = new JoueurBDManager();
 
                 // Met à jour le joueur avec les données fournies (après les avoir sécurisées)
-                echo $joueurBD->update(
+                if($joueurBD->update(
                     htmlspecialchars($vars['pk_joueur'], ENT_QUOTES, 'utf-8'),
                     htmlspecialchars($vars['description'], ENT_QUOTES, 'utf-8')
-                );
+                )){
+                    http_response_code(200);
+                } else {
+                    http_response_code(500);
+                }
             }
         } else {
 			http_response_code(401);
-			echo '<result>Pas connecté</result>';
 		}
     }
 }

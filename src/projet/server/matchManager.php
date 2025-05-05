@@ -19,7 +19,7 @@ if (isset($_SERVER['REQUEST_METHOD'])) {
     if ($_SERVER['REQUEST_METHOD'] == 'GET'){
        	// Crée une instance du gestionnaire de base de données des matchs
        	$matchBD = new MatchBDManager();
-        
+		http_response_code(200);
        	// Récupère les données des matchs au format XML et les affiche
        	echo $matchBD->getInXML();
    	}
