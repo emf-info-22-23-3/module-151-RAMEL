@@ -1,14 +1,21 @@
 <?php 
 	include_once('Connexion.php');
         
-	class  EquipeBDManager
+	/**
+	 * Classe EquipeBDManager
+	 * 
+	 * Cette classe permet d'effectuer des opérations CRUD sur les équipes
+	 * dans la base de données, telles que la lecture, la mise à jour,
+	 * ou la génération de résultats en XML.
+	 */
+	class EquipeBDManager
 	{
 		/**
-		* Fonction permettant la lecture des equipes.
-		* Cette fonction permet de retourner la liste des equipes se trouvant dans la liste
-		*
-		* @return liste de equipe
-		*/
+		 * Fonction permettant la lecture des équipes.
+		 * Cette fonction permet de retourner la liste des équipes se trouvant dans la liste.
+		 *
+		 * @return array Liste d'objets Equipe
+		 */
 		public function readEquipe()
 		{
 			$count = 0;
@@ -27,11 +34,11 @@
 		}
 
 		/**
-		 * Fonction permettant de mettre à jour la description d'une equipe.
+		 * Fonction permettant de mettre à jour la description d'une équipe.
 		 * 
-		 * @param $pk_equipe : Identifiant de l'équipe
-		 * @param $trophe : trophe de l'équipe
-		 * @return String : Résultat de la mise à jour
+		 * @param int $pk_equipe Identifiant de l'équipe
+		 * @param string $trophe Trophée de l'équipe
+		 * @return string Résultat de la mise à jour (en XML)
 		 */
 		public function update($pk_equipe, $trophe) {
         	$query = "UPDATE T_Equipe set trophe = :trophe where PK_Equipe = :pk_equipe";
@@ -48,10 +55,10 @@
     	}
 
 		/**
-		 * Fonction permettant de retourner le PK d'une equipe.
+		 * Fonction permettant de retourner le PK d'une équipe.
 		 * 
-		 * @param $nom : nom de l'équipe
-		 * @return String : PK de l'équipe
+		 * @param string $nom Nom de l'équipe
+		 * @return string PK de l'équipe ou "False" en XML
 		 */
 		public function getPK($nom) {
         	$query = "SELECT PK_Equipe FROM T_Equipe WHERE nom = :nom";
@@ -67,10 +74,10 @@
     	}
 
 		/**
-		* Fonction permettant de retourner la liste des equipes en XML.
-		*
-		* @return String. Liste des equipes en XML
-		*/
+		 * Fonction permettant de retourner la liste des équipes en XML.
+		 *
+		 * @return string Liste des équipes au format XML
+		 */
 		public function getInXML()
 		{
 			$listEquipe = $this->readEquipe();

@@ -1,13 +1,19 @@
-
 <?php
 include_once('Connexion.php');
+
+/**
+ * Classe LoginBDManager
+ *
+ * Cette classe permet de gérer les opérations de connexion liées aux utilisateurs.
+ */
 class LoginBDManager
 {
     /**
      * Fonction permettant de vérifier si le login et le mot de passe sont corrects.
+     * Elle récupère le mot de passe associé à un nom d'utilisateur donné.
      * 
-     * @param String $username. Login de l'utilisateur
-     * @return String. Mot de passe de l'utilisateur
+     * @param string $username Login de l'utilisateur
+     * @return array|null Mot de passe de l'utilisateur (sous forme de tableau associatif), ou null si non trouvé
      */
     function checkLogin($username) {
         $result = null;

@@ -1,25 +1,36 @@
 <?php
 
 /**
- * Classe connexion
+ * Classe Connexion
  *
- * Cette classe de gérer l'accès à la base de données.
- *
+ * Cette classe gère la connexion à la base de données via PDO.
+ * Elle utilise le pattern Singleton pour garantir une unique instance de connexion.
+ * Elle fournit des méthodes pour exécuter des requêtes SQL et gérer des transactions.
  */
-
-class Connexion {
-
+class Connexion
+{
+    /**
+     * L'unique instance de la classe (Singleton).
+     *
+     * @var Connexion|null
+     */
     private static $_instance = null;
+
+    /**
+     * L'instance PDO utilisée pour la connexion à la base de données.
+     *
+     * @var PDO
+     */
     private $pdo;
 
     /**
-     * Méthode qui crée l'unique instance de la classe
-     * si elle n'existe pas encore puis la retourne.
+     * Retourne l'instance unique de la classe Connexion.
+     * Crée une nouvelle instance si elle n'existe pas encore.
      *
-     * @param void
-     * @return Singleton de la connexion
+     * @return Connexion Instance unique de Connexion
      */
-    public static function getInstance() {
+    public static function getInstance()
+    {
         if (is_null(self::$_instance)) {
             self::$_instance = new Connexion();
         }
@@ -27,17 +38,33 @@ class Connexion {
     }
 
     /**
-     * Fonction permettant d'ouvrir une connexion à la base de données.
+     * Constructeur privé. Initialise la connexion à la base de données.
      */
-    private function __construct() {
+    private function __construct()
+    {
         try {
-            $this->pdo = new PDO('mysql:host=emf-informatique.ch;dbname=ramela_bd_SwissHockey', 'ramela_ramela', 'xMl*V@LXF!HM', array(
-                PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8',
-                PDO::ATTR_PERSISTENT => true));
+            $this->pdo = new PDO(
+                'mysql:host=emf-informatique.ch;dbname=ramela_bd_SwissHockey',
+                'ramela_ramela',
+                'xMl*V@LXF!HM',
+                array(
+                    PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8',
+                    PDO::ATTR_PERSISTENT => true
+                )
+            );
 
-            /**$this->pdo = new PDO('mysql:host=mysql;dbname=bd_SwissHockey', 'root', 'root', array(
-                PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8',
-                PDO::ATTR_PERSISTENT => true));**/
+            // Autre configuration alternative (désactivée)
+            /*
+            $this->pdo = new PDO(
+                'mysql:host=mysql;dbname=bd_SwissHockey',
+                'root',
+                'root',
+                array(
+                    PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8',
+                    PDO::ATTR_PERSISTENT => true
+                )
+            );
+            */
         } catch (PDOException $e) {
             print "Erreur !: " . $e->getMessage() . "<br/>";
             die();
@@ -45,21 +72,22 @@ class Connexion {
     }
 
     /**
-     * Fonction permettant de fermer la connexion à la base de données.
+     * Destructeur. Ferme la connexion à la base de données.
      */
-    public function __destruct() {
+    public function __destruct()
+    {
         $this->pdo = null;
     }
 
     /**
-     * Fonction permettant d'exécuter un select dans MySQL.
-     * A utiliser pour les SELECT.
-     * 
-     * @param String $query. Requête à exécuter.
-     * @param Array $params. Contient les paramètres à ajouter à la requête (null si aucun paramètre n'est requis)
-     * @return toutes les lignes du select
+     * Exécute une requête SELECT et retourne tous les résultats.
+     *
+     * @param string $query Requête SQL à exécuter.
+     * @param array $params Paramètres de la requête (facultatif).
+     * @return array Résultats du SELECT sous forme de tableau associatif.
      */
-    public function selectQuery($query, $params) {
+    public function selectQuery($query, $params)
+    {
         try {
             $queryPrepared = $this->pdo->prepare($query);
             $queryPrepared->execute($params);
@@ -71,14 +99,14 @@ class Connexion {
     }
 
     /**
-     * Fonction permettant d'exécuter un select avec une seule réponse dans MySQL.
-     * A utiliser pour les SELECT.
-     * 
-     * @param String $query. Requête à exécuter.
-     * @param Array $params. Contient les paramètres à ajouter à la requête (null si aucun paramètre n'est requis)
-     * @return la première ligne du select
+     * Exécute une requête SELECT et retourne un seul résultat.
+     *
+     * @param string $query Requête SQL à exécuter.
+     * @param array $params Paramètres de la requête (facultatif).
+     * @return array|false La première ligne du résultat ou false si aucune donnée.
      */
-    public function selectSingleQuery($query, $params) {
+    public function selectSingleQuery($query, $params)
+    {
         try {
             $queryPrepared = $this->pdo->prepare($query);
             $queryPrepared->execute($params);
@@ -90,14 +118,14 @@ class Connexion {
     }
 
     /**
-     * Fonction permettant d'exécuter une requête MySQL.
-     * A utiliser pour les UPDATE, DELETE, INSERT.
+     * Exécute une requête d'écriture (INSERT, UPDATE, DELETE).
      *
-     * @param String $query. Requête à exécuter.
-     * @param Array $params. Contient les paramètres à ajouter à la requête  (null si aucun paramètre n'est requis)
-     * @return le nombre de lignes affectées par la requête
+     * @param string $query Requête SQL à exécuter.
+     * @param array $params Paramètres de la requête (facultatif).
+     * @return int Nombre de lignes affectées.
      */
-    public function executeQuery($query, $params) {
+    public function executeQuery($query, $params)
+    {
         try {
             $queryPrepared = $this->pdo->prepare($query);
             $queryPrepared->execute($params);
@@ -109,15 +137,15 @@ class Connexion {
     }
 
     /**
-     * Fonction permettant d'obtenir le dernier id inséré.
-     * 
-     * @param String $table. la table où a été inséré l'objet. 
-     * @return int: l'id du dernier élément inséré.
+     * Retourne l'ID du dernier enregistrement inséré dans une table.
+     *
+     * @param string|null $table Nom de la table (facultatif, dépend du SGBD).
+     * @return string ID du dernier élément inséré.
      */
-    public function getLastId($table) {
+    public function getLastId($table)
+    {
         try {
-            $lastId = $this->pdo->lastInsertId($table);
-            return $lastId;
+            return $this->pdo->lastInsertId($table);
         } catch (PDOException $e) {
             print "Erreur !: " . $e->getMessage() . "<br/>";
             die();
@@ -125,20 +153,24 @@ class Connexion {
     }
 
     /**
-     * Méthode permettant de débuter une nouvelle transaction
-     * 
-     * @return bool: true si la transaction a bien débuté
+     * Démarre une transaction.
+     *
+     * @return bool True si la transaction a été démarrée avec succès.
      */
-    public function startTransaction() {
+    public function startTransaction()
+    {
         return $this->pdo->beginTransaction();
     }
 
     /**
-     * Méthode permettant d'ajouter une requête à la transaction en cours
-     * 
-     * @return bool: true si la requête est fonctionnelle et qu'une transaction est bien en cours
+     * Ajoute une requête à la transaction en cours.
+     *
+     * @param string $query Requête SQL à exécuter.
+     * @param array $params Paramètres de la requête.
+     * @return bool True si la requête a été exécutée avec succès.
      */
-    public function addQueryToTransaction($query, $params) {
+    public function addQueryToTransaction($query, $params)
+    {
         $res = false;
         if ($this->pdo->inTransaction()) {
             $maQuery = $this->pdo->prepare($query);
@@ -148,11 +180,12 @@ class Connexion {
     }
 
     /**
-     * Méthode permettant de valider la transaction
-     * 
-     * @return bool: true si la validation s'est correctement déroulée et qu'une transaction était bien en cours
+     * Valide la transaction en cours.
+     *
+     * @return bool True si la validation a réussi.
      */
-    public function commitTransaction() {
+    public function commitTransaction()
+    {
         $res = false;
         if ($this->pdo->inTransaction()) {
             $res = $this->pdo->commit();
@@ -161,16 +194,16 @@ class Connexion {
     }
 
     /**
-     * Méthode permettant d'annuler la transaction
-     * 
-     * @return bool: true si la validation s'est correctement annulée et qu'une transaction était bien en cours
+     * Annule la transaction en cours.
+     *
+     * @return bool True si l'annulation a réussi.
      */
-    public function rollbackTransaction() {
+    public function rollbackTransaction()
+    {
         $res = false;
         if ($this->pdo->inTransaction()) {
             $res = $this->pdo->rollBack();
         }
         return $res;
     }
-
 }
